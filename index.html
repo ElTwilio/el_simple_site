@@ -1,649 +1,673 @@
-"use client"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import type React from "react"
+<!-- Updated Segment snippet with your write key -->
+<script>
+  !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="Ao51Ac0DYTbXHJcIKFOHDDCNwC1eNRj7";;analytics.SNIPPET_VERSION="5.2.0";
+  analytics.load("Ao51Ac0DYTbXHJcIKFOHDDCNwC1eNRj7");
+  analytics.page();
+  }}();
+</script>
 
-import { useState, useEffect } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AlertCircle, CheckCircle, Code, Eye, Users, Zap } from "lucide-react"
+  <style>
+    /* Complete redesign with modern styling and popup support */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-// Segment Analytics Interface
-interface SegmentEvent {
-  id: string
-  type: "identify" | "track" | "page" | "group" | "alias"
-  event?: string
-  userId?: string
-  traits?: Record<string, any>
-  properties?: Record<string, any>
-  timestamp: string
-}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-export default function SegmentDemo() {
-  const [events, setEvents] = useState<SegmentEvent[]>([])
-  const [showEventPopup, setShowEventPopup] = useState<SegmentEvent | null>(null)
-  const [isAnalyticsLoaded, setIsAnalyticsLoaded] = useState(false)
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-  // Form states
-  const [regForm, setRegForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    userId: "",
-    company: "",
-  })
+    h1 {
+      text-align: center;
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
 
-  const [productForm, setProductForm] = useState({
-    product: "",
-    role: "",
-    email: "",
-    company: "",
-  })
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
 
-  const [trialForm, setTrialForm] = useState({
-    product: "",
-    startDate: "",
-    contact: "",
-    email: "",
-    teamSize: "",
-  })
+    .status-bar {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
 
-  // Initialize Segment Analytics
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.innerHTML = `
-      !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="Ao51Ac0DYTbXHJcIKFOHDDCNwC1eNRj7";;analytics.SNIPPET_VERSION="5.2.0";
-      analytics.load("Ao51Ac0DYTbXHJcIKFOHDDCNwC1eNRj7");
-      analytics.page();
-      }}();
-    `
-    document.head.appendChild(script)
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-    // Wait for analytics to load
-    const checkAnalytics = setInterval(() => {
-      if (window.analytics && window.analytics.initialized) {
-        setIsAnalyticsLoaded(true)
-        clearInterval(checkAnalytics)
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
 
-        // Track initial page view
-        addEvent({
-          id: Date.now().toString(),
-          type: "page",
-          properties: {
-            title: "Segment Demo Page",
-            url: window.location.href,
-            path: window.location.pathname,
-          },
-          timestamp: new Date().toISOString(),
-        })
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .forms-section {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    .form-card {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .form-card h3 {
+      color: #374151;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-row {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      color: #374151;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+    }
+
+    .event-log {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .event-log h3 {
+      color: #374151;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .event-counter {
+      background: #667eea;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .event-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-left: 4px solid #667eea;
+    }
+
+    .event-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .event-type {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .event-time {
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .event-data {
+      background: #1f2937;
+      color: #e5e7eb;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    /* Added popup notification styles */
+    .popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #10b981;
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+    }
+
+    .popup.show {
+      transform: translateX(0);
+    }
+
+    .popup-header {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .popup-body {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* Added advanced features section */
+    .advanced-section {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .advanced-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .advanced-btn {
+      background: #f59e0b;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .advanced-btn:hover {
+      background: #d97706;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
       }
-    }, 100)
-
-    return () => {
-      clearInterval(checkAnalytics)
-      document.head.removeChild(script)
+      
+      h1 {
+        font-size: 2rem;
+      }
     }
-  }, [])
+  </style>
+  
+  <title>El's Enhanced Segment Analytics Demo</title>
+</head>
+<body>
+  <!-- Added popup notification container -->
+  <div id="popup" class="popup">
+    <div class="popup-header" id="popup-header"></div>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
 
-  const addEvent = (event: SegmentEvent) => {
-    setEvents((prev) => [event, ...prev])
-    setShowEventPopup(event)
-    setTimeout(() => setShowEventPopup(null), 3000)
-  }
-
-  const handleIdentify = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!window.analytics) return
-
-    const traits = {
-      firstName: regForm.firstName,
-      lastName: regForm.lastName,
-      name: `${regForm.firstName} ${regForm.lastName}`,
-      email: regForm.email,
-      phone: regForm.phone,
-      company: regForm.company,
-    }
-
-    window.analytics.identify(regForm.userId, traits)
-
-    addEvent({
-      id: Date.now().toString(),
-      type: "identify",
-      userId: regForm.userId,
-      traits,
-      timestamp: new Date().toISOString(),
-    })
-
-    // Reset form
-    setRegForm({ firstName: "", lastName: "", email: "", phone: "", userId: "", company: "" })
-  }
-
-  const handleProductRequest = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!window.analytics) return
-
-    const properties = {
-      product: productForm.product,
-      role: productForm.role,
-      email: productForm.email,
-      company: productForm.company,
-      source: "demo_page",
-    }
-
-    window.analytics.track("Product Info Requested", properties)
-
-    addEvent({
-      id: Date.now().toString(),
-      type: "track",
-      event: "Product Info Requested",
-      properties,
-      timestamp: new Date().toISOString(),
-    })
-
-    setProductForm({ product: "", role: "", email: "", company: "" })
-  }
-
-  const handleTrialRequest = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!window.analytics) return
-
-    const properties = {
-      product: trialForm.product,
-      startDate: trialForm.startDate,
-      contact: trialForm.contact,
-      email: trialForm.email,
-      teamSize: Number.parseInt(trialForm.teamSize) || 1,
-      requestDate: new Date().toISOString().split("T")[0],
-    }
-
-    window.analytics.track("Trial Requested", properties)
-
-    addEvent({
-      id: Date.now().toString(),
-      type: "track",
-      event: "Trial Requested",
-      properties,
-      timestamp: new Date().toISOString(),
-    })
-
-    setTrialForm({ product: "", startDate: "", contact: "", email: "", teamSize: "" })
-  }
-
-  const handleGroupCall = () => {
-    if (!window.analytics) return
-
-    const groupId = `company_${Date.now()}`
-    const traits = {
-      name: "Demo Company",
-      industry: "Technology",
-      employees: 50,
-      plan: "Enterprise",
-    }
-
-    window.analytics.group(groupId, traits)
-
-    addEvent({
-      id: Date.now().toString(),
-      type: "group",
-      properties: { groupId, ...traits },
-      timestamp: new Date().toISOString(),
-    })
-  }
-
-  const handleAliasCall = () => {
-    if (!window.analytics) return
-
-    const newId = `user_${Date.now()}`
-    const previousId = regForm.userId || "anonymous_user"
-
-    window.analytics.alias(newId, previousId)
-
-    addEvent({
-      id: Date.now().toString(),
-      type: "alias",
-      properties: { newId, previousId },
-      timestamp: new Date().toISOString(),
-    })
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Segment Analytics Demo</h1>
-          <p className="text-lg text-gray-600 mb-4">
-            Interactive showcase of Segment's customer data platform capabilities
-          </p>
-          <div className="flex items-center justify-center gap-2">
-            <Badge variant={isAnalyticsLoaded ? "default" : "secondary"}>
-              {isAnalyticsLoaded ? (
-                <>
-                  <CheckCircle className="w-4 h-4 mr-1" />
-                  Analytics Loaded
-                </>
-              ) : (
-                <>
-                  <AlertCircle className="w-4 h-4 mr-1" />
-                  Loading Analytics...
-                </>
-              )}
-            </Badge>
-            <Badge variant="outline">{events.length} Events Tracked</Badge>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Forms Section */}
-          <div className="lg:col-span-2">
-            <Tabs defaultValue="identify" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
-                <TabsTrigger value="identify">Identify</TabsTrigger>
-                <TabsTrigger value="track">Track</TabsTrigger>
-                <TabsTrigger value="advanced">Advanced</TabsTrigger>
-                <TabsTrigger value="events">Events</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="identify">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Users className="w-5 h-5" />
-                      User Registration (Identify)
-                    </CardTitle>
-                    <CardDescription>
-                      Use analytics.identify() to associate user traits with a unique ID
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <form onSubmit={handleIdentify} className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="firstName">First Name</Label>
-                          <Input
-                            id="firstName"
-                            value={regForm.firstName}
-                            onChange={(e) => setRegForm({ ...regForm, firstName: e.target.value })}
-                            placeholder="John"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="lastName">Last Name</Label>
-                          <Input
-                            id="lastName"
-                            value={regForm.lastName}
-                            onChange={(e) => setRegForm({ ...regForm, lastName: e.target.value })}
-                            placeholder="Doe"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={regForm.email}
-                          onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
-                          placeholder="john@example.com"
-                          required
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="phone">Phone</Label>
-                          <Input
-                            id="phone"
-                            value={regForm.phone}
-                            onChange={(e) => setRegForm({ ...regForm, phone: e.target.value })}
-                            placeholder="+1 (555) 123-4567"
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="userId">User ID</Label>
-                          <Input
-                            id="userId"
-                            value={regForm.userId}
-                            onChange={(e) => setRegForm({ ...regForm, userId: e.target.value })}
-                            placeholder="user_123"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="company">Company</Label>
-                        <Input
-                          id="company"
-                          value={regForm.company}
-                          onChange={(e) => setRegForm({ ...regForm, company: e.target.value })}
-                          placeholder="Acme Corp"
-                        />
-                      </div>
-                      <Button type="submit" className="w-full" disabled={!isAnalyticsLoaded}>
-                        Register User
-                      </Button>
-                    </form>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="track">
-                <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Eye className="w-5 h-5" />
-                        Product Interest (Track)
-                      </CardTitle>
-                      <CardDescription>Track user actions and events with custom properties</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handleProductRequest} className="space-y-4">
-                        <div>
-                          <Label htmlFor="product">Product</Label>
-                          <Select
-                            value={productForm.product}
-                            onValueChange={(value) => setProductForm({ ...productForm, product: value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select a product" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="segment-cdp">Segment CDP</SelectItem>
-                              <SelectItem value="twilio-flex">Twilio Flex</SelectItem>
-                              <SelectItem value="twilio-sendgrid">SendGrid</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="role">Role</Label>
-                            <Input
-                              id="role"
-                              value={productForm.role}
-                              onChange={(e) => setProductForm({ ...productForm, role: e.target.value })}
-                              placeholder="Marketing Manager"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="productEmail">Email</Label>
-                            <Input
-                              id="productEmail"
-                              type="email"
-                              value={productForm.email}
-                              onChange={(e) => setProductForm({ ...productForm, email: e.target.value })}
-                              placeholder="user@company.com"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <Label htmlFor="productCompany">Company</Label>
-                          <Input
-                            id="productCompany"
-                            value={productForm.company}
-                            onChange={(e) => setProductForm({ ...productForm, company: e.target.value })}
-                            placeholder="Company Name"
-                          />
-                        </div>
-                        <Button type="submit" className="w-full" disabled={!isAnalyticsLoaded}>
-                          Request Product Info
-                        </Button>
-                      </form>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Zap className="w-5 h-5" />
-                        Trial Request (Track)
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handleTrialRequest} className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="trialProduct">Product</Label>
-                            <Select
-                              value={trialForm.product}
-                              onValueChange={(value) => setTrialForm({ ...trialForm, product: value })}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select product" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="segment-cdp">Segment CDP</SelectItem>
-                                <SelectItem value="twilio-flex">Twilio Flex</SelectItem>
-                                <SelectItem value="twilio-sendgrid">SendGrid</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div>
-                            <Label htmlFor="startDate">Start Date</Label>
-                            <Input
-                              id="startDate"
-                              type="date"
-                              value={trialForm.startDate}
-                              onChange={(e) => setTrialForm({ ...trialForm, startDate: e.target.value })}
-                            />
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="contact">Contact Name</Label>
-                            <Input
-                              id="contact"
-                              value={trialForm.contact}
-                              onChange={(e) => setTrialForm({ ...trialForm, contact: e.target.value })}
-                              placeholder="Contact Person"
-                            />
-                          </div>
-                          <div>
-                            <Label htmlFor="trialEmail">Email</Label>
-                            <Input
-                              id="trialEmail"
-                              type="email"
-                              value={trialForm.email}
-                              onChange={(e) => setTrialForm({ ...trialForm, email: e.target.value })}
-                              placeholder="contact@company.com"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <Label htmlFor="teamSize">Team Size</Label>
-                          <Input
-                            id="teamSize"
-                            type="number"
-                            value={trialForm.teamSize}
-                            onChange={(e) => setTrialForm({ ...trialForm, teamSize: e.target.value })}
-                            placeholder="5"
-                          />
-                        </div>
-                        <Button type="submit" className="w-full" disabled={!isAnalyticsLoaded}>
-                          Request Trial
-                        </Button>
-                      </form>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="advanced">
-                <div className="space-y-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Advanced Segment Methods</CardTitle>
-                      <CardDescription>
-                        Explore group() and alias() methods for advanced user management
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold mb-2">Group Call</h4>
-                        <p className="text-sm text-gray-600 mb-3">
-                          Associate users with a group (company, organization, etc.)
-                        </p>
-                        <Button onClick={handleGroupCall} disabled={!isAnalyticsLoaded} className="w-full">
-                          Create Demo Group
-                        </Button>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-2">Alias Call</h4>
-                        <p className="text-sm text-gray-600 mb-3">Link a new user ID to a previous anonymous ID</p>
-                        <Button onClick={handleAliasCall} disabled={!isAnalyticsLoaded} className="w-full">
-                          Create User Alias
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="events">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Event History</CardTitle>
-                    <CardDescription>Real-time view of all Segment events fired from this page</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3 max-h-96 overflow-y-auto">
-                      {events.length === 0 ? (
-                        <p className="text-gray-500 text-center py-8">No events tracked yet</p>
-                      ) : (
-                        events.map((event) => (
-                          <div key={event.id} className="border rounded-lg p-3 bg-gray-50">
-                            <div className="flex items-center justify-between mb-2">
-                              <Badge
-                                variant={
-                                  event.type === "identify"
-                                    ? "default"
-                                    : event.type === "track"
-                                      ? "secondary"
-                                      : "outline"
-                                }
-                              >
-                                {event.type}
-                              </Badge>
-                              <span className="text-xs text-gray-500">
-                                {new Date(event.timestamp).toLocaleTimeString()}
-                              </span>
-                            </div>
-                            {event.event && <p className="font-medium text-sm">{event.event}</p>}
-                            {event.userId && <p className="text-sm text-gray-600">User: {event.userId}</p>}
-                            <details className="mt-2">
-                              <summary className="text-xs text-blue-600 cursor-pointer">View Data</summary>
-                              <pre className="text-xs bg-white p-2 rounded mt-1 overflow-x-auto">
-                                {JSON.stringify(
-                                  {
-                                    ...(event.traits && { traits: event.traits }),
-                                    ...(event.properties && { properties: event.properties }),
-                                  },
-                                  null,
-                                  2,
-                                )}
-                              </pre>
-                            </details>
-                          </div>
-                        ))
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </div>
-
-          {/* Live Code Display */}
-          <div className="lg:col-span-1">
-            <Card className="sticky top-4">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Code className="w-5 h-5" />
-                  Live Code
-                </CardTitle>
-                <CardDescription>See the Segment calls being made in real-time</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4 text-xs">
-                  <div>
-                    <h4 className="font-semibold mb-2">Identify Call:</h4>
-                    <pre className="bg-gray-100 p-2 rounded text-xs overflow-x-auto">
-                      {`analytics.identify(userId, {
-  firstName: "John",
-  lastName: "Doe", 
-  email: "john@example.com",
-  phone: "+1555123456",
-  company: "Acme Corp"
-})`}
-                    </pre>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Track Call:</h4>
-                    <pre className="bg-gray-100 p-2 rounded text-xs overflow-x-auto">
-                      {`analytics.track("Product Info Requested", {
-  product: "segment-cdp",
-  role: "Marketing Manager",
-  email: "user@company.com",
-  source: "demo_page"
-})`}
-                    </pre>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Group Call:</h4>
-                    <pre className="bg-gray-100 p-2 rounded text-xs overflow-x-auto">
-                      {`analytics.group(groupId, {
-  name: "Demo Company",
-  industry: "Technology",
-  employees: 50,
-  plan: "Enterprise"
-})`}
-                    </pre>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-
-        {/* Event Popup */}
-        {showEventPopup && (
-          <div className="fixed top-4 right-4 bg-white border border-green-200 rounded-lg shadow-lg p-4 max-w-sm z-50 animate-in slide-in-from-right">
-            <div className="flex items-center gap-2 mb-2">
-              <CheckCircle className="w-5 h-5 text-green-600" />
-              <span className="font-semibold">Event Fired!</span>
-            </div>
-            <p className="text-sm text-gray-600 mb-2">
-              <strong>{showEventPopup.type}</strong>
-              {showEventPopup.event && `: ${showEventPopup.event}`}
-            </p>
-            <details className="text-xs">
-              <summary className="cursor-pointer text-blue-600">View payload</summary>
-              <pre className="mt-1 bg-gray-50 p-2 rounded overflow-x-auto">
-                {JSON.stringify(
-                  {
-                    ...(showEventPopup.traits && { traits: showEventPopup.traits }),
-                    ...(showEventPopup.properties && { properties: showEventPopup.properties }),
-                  },
-                  null,
-                  2,
-                )}
-              </pre>
-            </details>
-          </div>
-        )}
+  <div class="container">
+    <h1>🚀 El's Enhanced Segment Analytics Demo</h1>
+    <p class="subtitle">Interactive showcase of Segment's customer data platform capabilities</p>
+    
+    <!-- Added status bar showing analytics status -->
+    <div class="status-bar">
+      <div class="status-item">
+        <div class="status-dot"></div>
+        <span>Segment Analytics: <strong id="analytics-status">Loading...</strong></span>
+      </div>
+      <div class="status-item">
+        <span>Events Fired: <strong id="event-count">0</strong></span>
+      </div>
+      <div class="status-item">
+        <span>Write Key: <strong>Ao51Ac...Rj7</strong></span>
       </div>
     </div>
-  )
-}
 
-declare global {
-  interface Window {
-    analytics: any
-  }
-}
+    <div class="main-content">
+      <div class="forms-section">
+        <!-- Enhanced registration form with better styling -->
+        <div class="form-card">
+          <h3>👤 User Registration & Identification</h3>
+          <form id="registration-form">
+            <div class="form-row">
+              <label for="reg_fname">First Name</label>
+              <input type="text" id="reg_fname" name="reg_firstname" placeholder="Enter first name" required>
+            </div>
+            <div class="form-row">
+              <label for="reg_lname">Last Name</label>
+              <input type="text" id="reg_lname" name="reg_lastname" placeholder="Enter last name" required>
+            </div>
+            <div class="form-row">
+              <label for="reg_email">Email Address</label>
+              <input type="email" id="reg_email" name="reg_email" placeholder="Enter email address" required>
+            </div>
+            <div class="form-row">
+              <label for="reg_phone">Phone Number</label>
+              <input type="tel" id="reg_phone" name="reg_phone" placeholder="Enter phone number">
+            </div>
+            <div class="form-row">
+              <label for="reg_user_id">User ID</label>
+              <input type="text" id="reg_user_id" name="reg_user_id" placeholder="Enter unique user ID" required>
+            </div>
+            <button type="submit" class="submit-btn">🔍 Identify User</button>
+          </form>
+        </div>
+
+        <!-- Enhanced product form -->
+        <div class="form-card">
+          <h3>📋 Product Information Request</h3>
+          <form id="product-form">
+            <div class="form-row">
+              <label for="product">Select Product</label>
+              <select id="product" name="product" required>
+                <option value="">Choose a product...</option>
+                <option value="segment_cdp">Segment CDP</option>
+                <option value="twilio_flex">Twilio Flex</option>
+                <option value="twilio_sendgrid">Twilio SendGrid</option>
+                <option value="twilio_voice">Twilio Voice & SMS</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="role">Your Role</label>
+              <input type="text" id="role" name="role" placeholder="e.g., Marketing Manager" required>
+            </div>
+            <div class="form-row">
+              <label for="email">Contact Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter contact email" required>
+            </div>
+            <div class="form-row">
+              <label for="company">Company Name</label>
+              <input type="text" id="company" name="company" placeholder="Enter company name">
+            </div>
+            <button type="submit" class="submit-btn">📊 Track Product Interest</button>
+          </form>
+        </div>
+
+        <!-- Enhanced trial form -->
+        <div class="form-card">
+          <h3>🚀 Trial Request</h3>
+          <form id="trial-form">
+            <div class="form-row">
+              <label for="trial_product">Select Product for Trial</label>
+              <select id="trial_product" name="trial_product" required>
+                <option value="">Choose a product...</option>
+                <option value="segment_cdp">Segment CDP</option>
+                <option value="twilio_flex">Twilio Flex</option>
+                <option value="twilio_sendgrid">Twilio SendGrid</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="trial_start_date">Preferred Start Date</label>
+              <input type="date" id="trial_start_date" name="trial_start_date" required>
+            </div>
+            <div class="form-row">
+              <label for="trial_contact">Contact Name</label>
+              <input type="text" id="trial_contact" name="trial_contact" placeholder="Enter contact name" required>
+            </div>
+            <div class="form-row">
+              <label for="trial_email">Contact Email</label>
+              <input type="email" id="trial_email" name="trial_email" placeholder="Enter contact email" required>
+            </div>
+            <button type="submit" class="submit-btn">🎯 Request Trial</button>
+          </form>
+        </div>
+
+        <!-- Added advanced Segment features section -->
+        <div class="form-card advanced-section">
+          <h3>🔧 Advanced Segment Features</h3>
+          <p style="color: #6b7280; margin-bottom: 15px;">Demonstrate additional Segment capabilities beyond basic tracking</p>
+          
+          <div class="form-row">
+            <label for="group_id">Group ID (for B2B tracking)</label>
+            <input type="text" id="group_id" placeholder="e.g., company-123" value="demo-company-456">
+          </div>
+          
+          <div class="form-row">
+            <label for="alias_id">Alias ID (for user merging)</label>
+            <input type="text" id="alias_id" placeholder="e.g., new-user-id">
+          </div>
+
+          <div class="advanced-buttons">
+            <button type="button" class="advanced-btn" onclick="demoGroup()">👥 Group Call</button>
+            <button type="button" class="advanced-btn" onclick="demoAlias()">🔗 Alias Call</button>
+            <button type="button" class="advanced-btn" onclick="demoPage()">📄 Page Call</button>
+            <button type="button" class="advanced-btn" onclick="demoReset()">🔄 Reset Call</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Enhanced sidebar with live event tracking -->
+      <div class="sidebar">
+        <div class="event-log">
+          <h3>
+            📊 Live Event Log 
+            <span class="event-counter" id="event-counter">0</span>
+          </h3>
+          <div id="event-list">
+            <p style="color: #6b7280; text-align: center; padding: 20px;">No events fired yet. Submit a form to see live tracking!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let eventCount = 0;
+    const eventList = document.getElementById('event-list');
+    const eventCounter = document.getElementById('event-counter');
+    const popup = document.getElementById('popup');
+
+    // Get current date
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = String(today.getFullYear());
+    today = mm + '/' + dd + '/' + yyyy;
+
+    // Check analytics status
+    analytics.ready(function() {
+      document.getElementById('analytics-status').textContent = 'Connected ✅';
+      showPopup('Analytics Ready', 'Segment analytics loaded successfully!');
+    });
+
+    // Define UI variables
+    const form_reg = document.querySelector('#registration-form');
+    const reg_fname = document.querySelector('#reg_fname');
+    const reg_lname = document.querySelector('#reg_lname');
+    const reg_email = document.querySelector('#reg_email');
+    const reg_phone = document.querySelector('#reg_phone');
+    const reg_user_id = document.querySelector('#reg_user_id');
+
+    const form_product = document.querySelector('#product-form');
+    const product_product = document.querySelector('#product');
+    const product_role = document.querySelector('#role');
+    const product_email = document.querySelector('#email');
+    const product_company = document.querySelector('#company');
+
+    const form_trial = document.querySelector('#trial-form');
+    const trial_product = document.querySelector('#trial_product');
+    const trial_start_date = document.querySelector('#trial_start_date');
+    const trial_contact = document.querySelector('#trial_contact');
+    const trial_email = document.querySelector('#trial_email');
+
+    // Add event listeners
+    form_reg.addEventListener('submit', addRegistration);
+    form_product.addEventListener('submit', addProduct);
+    form_trial.addEventListener('submit', addTrial);
+
+    function showPopup(title, message) {
+      document.getElementById('popup-header').textContent = title;
+      document.getElementById('popup-body').textContent = message;
+      popup.classList.add('show');
+      
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 4000);
+    }
+
+    function logEvent(type, data) {
+      eventCount++;
+      eventCounter.textContent = eventCount;
+      document.getElementById('event-count').textContent = eventCount;
+
+      if (eventCount === 1) {
+        eventList.innerHTML = '';
+      }
+
+      const eventItem = document.createElement('div');
+      eventItem.className = 'event-item';
+      eventItem.innerHTML = `
+        <div class="event-header">
+          <span class="event-type">${type}</span>
+          <span class="event-time">${new Date().toLocaleTimeString()}</span>
+        </div>
+        <div class="event-data">${JSON.stringify(data, null, 2)}</div>
+      `;
+      
+      eventList.insertBefore(eventItem, eventList.firstChild);
+    }
+
+    function addRegistration(e) {
+      e.preventDefault();
+      
+      const userData = {
+        fname: reg_fname.value,
+        lname: reg_lname.value,
+        phone: reg_phone.value,
+        email: reg_email.value,
+        name: reg_fname.value + ' ' + reg_lname.value,
+        registration_date: today
+      };
+
+      analytics.identify(reg_user_id.value, userData);
+      
+      logEvent('identify', {
+        userId: reg_user_id.value,
+        traits: userData
+      });
+      
+      showPopup('User Identified! 👤', `Successfully identified user: ${userData.name}`);
+      form_reg.reset();
+    }
+
+    function addProduct(e) {
+      e.preventDefault();
+      
+      const productData = {
+        product: product_product.value,
+        role: product_role.value,
+        company: product_company.value,
+        request_date: today,
+        context: {
+          traits: {
+            email: product_email.value
+          }
+        }
+      };
+
+      analytics.track("Product Info Requested", productData);
+      
+      logEvent('track', {
+        event: 'Product Info Requested',
+        properties: productData
+      });
+      
+      showPopup('Event Tracked! 📊', `Product interest tracked: ${product_product.value}`);
+      form_product.reset();
+    }
+
+    function addTrial(e) {
+      e.preventDefault();
+      
+      const trialData = {
+        trial_product: trial_product.value,
+        trial_start_date: trial_start_date.value,
+        trial_request_date: today,
+        context: {
+          traits: {
+            trial_contact: trial_contact.value,
+            email: trial_email.value
+          }
+        }
+      };
+
+      analytics.track("Trial Request", trialData);
+      
+      logEvent('track', {
+        event: 'Trial Request',
+        properties: trialData
+      });
+      
+      showPopup('Trial Requested! 🚀', `Trial request submitted for: ${trial_product.value}`);
+      form_trial.reset();
+    }
+
+    function demoGroup() {
+      const groupId = document.getElementById('group_id').value || 'demo-company-456';
+      const groupData = {
+        name: 'Demo Company Inc.',
+        industry: 'Technology',
+        employees: 150,
+        plan: 'Enterprise'
+      };
+
+      analytics.group(groupId, groupData);
+      
+      logEvent('group', {
+        groupId: groupId,
+        traits: groupData
+      });
+      
+      showPopup('Group Tracked! 👥', `Associated user with group: ${groupId}`);
+    }
+
+    function demoAlias() {
+      const aliasId = document.getElementById('alias_id').value;
+      if (!aliasId) {
+        alert('Please enter an alias ID first');
+        return;
+      }
+
+      analytics.alias(aliasId);
+      
+      logEvent('alias', {
+        previousId: 'anonymous_user',
+        userId: aliasId
+      });
+      
+      showPopup('User Aliased! 🔗', `User identity merged with: ${aliasId}`);
+    }
+
+    function demoPage() {
+      const pageData = {
+        title: 'Enhanced Segment Demo',
+        url: window.location.href,
+        path: window.location.pathname,
+        referrer: document.referrer
+      };
+
+      analytics.page('Demo Page View', pageData);
+      
+      logEvent('page', {
+        name: 'Demo Page View',
+        properties: pageData
+      });
+      
+      showPopup('Page Tracked! 📄', 'Page view event sent to Segment');
+    }
+
+    function demoReset() {
+      analytics.reset();
+      
+      logEvent('reset', {
+        action: 'User session reset',
+        timestamp: new Date().toISOString()
+      });
+      
+      showPopup('Session Reset! 🔄', 'User session and identity cleared');
+    }
+
+    // Auto-set trial start date to tomorrow
+    document.getElementById('trial_start_date').valueAsDate = new Date(Date.now() + 86400000);
+  </script>
+</body>
+</html>
