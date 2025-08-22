@@ -692,6 +692,12 @@
         function checkout() {
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             
+            // Get customer email from the most recent form submission
+            let customerEmail = '';
+            if (cart.length > 0 && cart[0].data && cart[0].data.email) {
+                customerEmail = cart[0].data.email;
+            }
+            
             // Track purchase
             analytics.track('Order Completed', {
                 order_id: 'ORDER_' + Date.now(),
@@ -705,62 +711,27 @@
                 user_hash: userHash
             });
 
-            alert(`Thank you for your purchase! Total: $${total.toFixed(2)}\n\nYou will receive your reading within 24-48 hours via email.\n\nOrder confirmation will be sent to your email address.`);
+            initializeWebchatAfterOrder(customerEmail, total);
+
+            alert(`Thank you for your purchase! Total: $${total.toFixed(2)}\n\nYou will receive your reading within 24-48 hours via email.\n\nOrder confirmation will be sent to your email address.\n\nOur support chat is now available if you have any questions!`);
             
             // Clear cart after purchase
             cart = [];
             updateCartCount();
         }
 
-        // File upload preview
-        document.getElementById('palmPhoto').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const fileUpload = document.querySelector('.file-upload');
-                fileUpload.innerHTML = `
-                    <p>✅ Photo uploaded: ${file.name}</p>
-                    <p style="font-size: 0.9rem; color: #666;">Click to change photo</p>
-                `;
-            }
-        });
-
-        // Track page interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Track page view
-            analytics.page('Fortune Telling Homepage', {
-                title: 'Mystic Fortune - Professional Fortune Telling Services',
-                url: window.location.href
-            });
-
-            // Track service card clicks
-            document.querySelectorAll('.service-card').forEach((card, index) => {
-                card.addEventListener('click', function() {
-                    const serviceName = card.querySelector('h3').textContent;
-                    analytics.track('Service Card Clicked', {
-                        service_name: serviceName,
-                        card_position: index + 1
-                    });
-                });
-            });
-        });
-
-        // Initialize Twilio Flex Webchat
-        let conversationHistory = [];
-        let currentEngagementId = null;
-
-        const appConfig = {
-            accountSid: "AC0403d08522d2e017a0cf49c2c31c27d1",
-            flexFlowSid: "FOd828936b3f0832aa61779ea3219bc2c5"
-        };
-        
-        // Initialize webchat when page loads
-        window.addEventListener('load', function() {
+        function initializeWebchatAfterOrder(customerEmail, orderTotal) {
             if (typeof Twilio !== 'undefined' && Twilio.FlexWebChat) {
                 const webchatConfig = {
-                    ...appConfig,
+                    accountSid: "AC0403d08522d2e017a0cf49c2c31c27d1",
+                    flexFlowSid: "FOd828936b3f0832aa61779ea3219bc2c5",
                     context: {
                         friendlyName: "Fortune Telling Customer",
-                        userHash: userHash || 'anonymous'
+                        userHash: userHash || 'anonymous',
+                        email: customerEmail || 'not-provided',
+                        orderTotal: orderTotal || 0,
+                        orderCompleted: true,
+                        orderDate: new Date().toISOString()
                     },
                     // Add event callbacks for Segment tracking
                     onStateChange: function(state) {
@@ -771,7 +742,9 @@
                             analytics.track('Webchat Opened', {
                                 timestamp: new Date().toISOString(),
                                 user_hash: userHash || 'anonymous',
-                                page_url: window.location.href
+                                page_url: window.location.href,
+                                post_order: true,
+                                order_total: orderTotal
                             });
                             window.chatOpenTracked = true;
                         }
@@ -800,7 +773,8 @@
                             message_length: message.body ? message.body.length : 0,
                             timestamp: new Date().toISOString(),
                             user_hash: userHash || 'anonymous',
-                            message_type: message.type || 'text'
+                            message_type: message.type || 'text',
+                            post_order: true
                         });
                     },
                     onMessageReceived: function(message) {
@@ -830,7 +804,10 @@
                         analytics.track('Webchat Engagement Started', {
                             engagement_id: engagement.sid || 'unknown',
                             timestamp: new Date().toISOString(),
-                            user_hash: userHash || 'anonymous'
+                            user_hash: userHash || 'anonymous',
+                            post_order: true,
+                            customer_email: customerEmail,
+                            order_total: orderTotal
                         });
                     },
                     onEngagementEnded: function(engagement) {
@@ -847,7 +824,10 @@
                                 end_time: new Date().toISOString(),
                                 duration_ms: sessionDuration,
                                 messages: conversationHistory,
-                                total_messages: conversationHistory.length
+                                total_messages: conversationHistory.length,
+                                post_order: true,
+                                customer_email: customerEmail,
+                                order_total: orderTotal
                             };
                             
                             // Update user traits with conversation history
@@ -866,7 +846,8 @@
                             session_duration: sessionDuration,
                             timestamp: new Date().toISOString(),
                             user_hash: userHash || 'anonymous',
-                            total_messages: conversationHistory.length
+                            total_messages: conversationHistory.length,
+                            post_order: true
                         });
                         
                         conversationHistory = [];
@@ -878,12 +859,44 @@
                 
                 analytics.track('Webchat Initialized', {
                     timestamp: new Date().toISOString(),
-                    user_hash: userHash || 'anonymous'
+                    user_hash: userHash || 'anonymous',
+                    post_order: true,
+                    customer_email: customerEmail,
+                    order_total: orderTotal
                 });
             } else {
                 console.error('[v0] Twilio FlexWebChat not available');
             }
+        }
+
+        // Track page interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            analytics.page('Fortune Telling Homepage', {
+                title: 'Mystic Fortune - Professional Fortune Telling Services',
+                url: window.location.href
+            });
+
+            // Track service card clicks
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    const serviceName = card.querySelector('h3').textContent;
+                    analytics.track('Service Card Clicked', {
+                        service_name: serviceName,
+                        card_position: index + 1
+                    });
+                });
+            });
         });
+
+        // Initialize Twilio Flex Webchat variables
+        let conversationHistory = [];
+        let currentEngagementId = null;
+
+        const appConfig = {
+            accountSid: "AC0403d08522d2e017a0cf49c2c31c27d1",
+            flexFlowSid: "FOd828936b3f0832aa61779ea3219bc2c5"
+        };
     </script>
 </body>
 </html>
