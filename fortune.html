@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystic Fortune - Professional Fortune Telling Services</title>
+    <link rel="canonical" href="https://yourusername.github.io/fortune-telling/">
+    
+    <!-- Segment Analytics -->
+    <script>
+      !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="nBAGUANxjIt82dZksyNOXFMRHdXm8ZWc";;analytics.SNIPPET_VERSION="5.2.0";
+      analytics.load("nBAGUANxjIt82dZksyNOXFMRHdXm8ZWc");
+      analytics.page();
+      }}();
+    </script>
+
+    <!-- Twilio Flex Webchat -->
+    <script src="https://assets.flex.twilio.com/releases/flex-webchat-ui/2.9.1/twilio-flex-webchat.min.js" integrity="sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==" crossorigin></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c1810;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            color: #d4af37;
+            padding: 2rem 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .services {
+            padding: 4rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card h3 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c1810;
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #d4af37, #f4d03f);
+            color: #2c1810;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #f4d03f, #d4af37);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #d4af37;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #2c1810;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .file-upload {
+            border: 2px dashed #d4af37;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #d4af37;
+            color: #2c1810;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-count {
+            background: #2c1810;
+            color: #d4af37;
+            border-radius: 50%;
+            padding: 2px 8px;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🔮 Mystic Fortune</h1>
+            <p class="subtitle">Unlock the mysteries of your destiny</p>
+        </div>
+    </header>
+
+    <div class="cart" onclick="viewCart()">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </div>
+
+    <main class="container">
+        <section class="services">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #d4af37; margin-bottom: 1rem;">Our Services</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Choose your path to enlightenment</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>✨ Personal Fortune Reading</h3>
+                    <p>Discover your destiny through the ancient art of astrology. I'll analyze your birth chart to reveal insights about your future, personality, and life path.</p>
+                    <div class="price">$49.99</div>
+                    <button class="btn" onclick="openModal('personal')">Get Your Reading</button>
+                </div>
+
+                <div class="service-card">
+                    <h3>💕 Compatibility Reading</h3>
+                    <p>Explore the cosmic connection between you and your romantic interest. Understand your relationship dynamics and potential for lasting love.</p>
+                    <div class="price">$79.99</div>
+                    <button class="btn" onclick="openModal('compatibility')">Check Compatibility</button>
+                </div>
+
+                <div class="service-card">
+                    <h3>🤚 Digital Palm Reading</h3>
+                    <p>Upload a clear photo of your palm and receive a detailed analysis of your life lines, revealing insights about your health, wealth, and relationships.</p>
+                    <div class="price">$39.99</div>
+                    <button class="btn" onclick="openModal('palm')">Upload Palm Photo</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Personal Fortune Modal -->
+    <div id="personalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('personalModal')">&times;</span>
+            <h2 style="color: #d4af37; margin-bottom: 1rem;">Personal Fortune Reading</h2>
+            <form id="personalForm">
+                <div class="form-group">
+                    <label>First Name *</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name *</label>
+                    <input type="text" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Birth Date *</label>
+                    <input type="date" name="birthDate" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Birth Time *</label>
+                        <input type="time" name="birthTime" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Time Zone</label>
+                        <select name="timeZone">
+                            <option value="EST">Eastern (EST)</option>
+                            <option value="CST">Central (CST)</option>
+                            <option value="MST">Mountain (MST)</option>
+                            <option value="PST">Pacific (PST)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Birth Latitude *</label>
+                        <input type="number" name="latitude" step="any" placeholder="e.g., 40.7128" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Birth Longitude *</label>
+                        <input type="number" name="longitude" step="any" placeholder="e.g., -74.0060" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Birth City/Location</label>
+                    <input type="text" name="birthLocation" placeholder="e.g., New York, NY">
+                </div>
+                <button type="submit" class="btn">Add to Cart - $49.99</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Compatibility Modal -->
+    <div id="compatibilityModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('compatibilityModal')">&times;</span>
+            <h2 style="color: #d4af37; margin-bottom: 1rem;">Compatibility Reading</h2>
+            <form id="compatibilityForm">
+                <h3 style="color: #2c1810; margin: 1.5rem 0 1rem 0;">Your Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your First Name *</label>
+                        <input type="text" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Last Name *</label>
+                        <input type="text" name="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Birth Date *</label>
+                        <input type="date" name="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Birth Time *</label>
+                        <input type="time" name="birthTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Your Birth Latitude *</label>
+                        <input type="number" name="latitude" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Birth Longitude *</label>
+                        <input type="number" name="longitude" step="any" required>
+                    </div>
+                </div>
+
+                <h3 style="color: #2c1810; margin: 2rem 0 1rem 0;">Partner's Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Partner's First Name *</label>
+                        <input type="text" name="partnerFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner's Last Name</label>
+                        <input type="text" name="partnerLastName">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Partner's Birth Date *</label>
+                        <input type="date" name="partnerBirthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner's Birth Time *</label>
+                        <input type="time" name="partnerBirthTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Partner's Birth Latitude *</label>
+                        <input type="number" name="partnerLatitude" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Partner's Birth Longitude *</label>
+                        <input type="number" name="partnerLongitude" step="any" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn">Add to Cart - $79.99</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Palm Reading Modal -->
+    <div id="palmModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('palmModal')">&times;</span>
+            <h2 style="color: #d4af37; margin-bottom: 1rem;">Digital Palm Reading</h2>
+            <form id="palmForm">
+                <div class="form-group">
+                    <label>First Name *</label>
+                    <input type="text" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>Last Name *</label>
+                    <input type="text" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Palm Photo *</label>
+                    <div class="file-upload" onclick="document.getElementById('palmPhoto').click()">
+                        <p>📸 Click to upload a clear photo of your palm</p>
+                        <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">
+                            For best results, take photo in good lighting with palm fully visible
+                        </p>
+                    </div>
+                    <input type="file" id="palmPhoto" name="palmPhoto" accept="image/*" style="display: none;" required>
+                </div>
+                <div class="form-group">
+                    <label>Which Hand?</label>
+                    <select name="handType" required>
+                        <option value="">Select hand</option>
+                        <option value="left">Left Hand</option>
+                        <option value="right">Right Hand</option>
+                        <option value="both">Both Hands</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Add to Cart - $39.99</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        let userHash = '';
+
+        // Generate 10-digit hash from email
+        function generateUserHash(email) {
+            let hash = 0;
+            for (let i = 0; i < email.length; i++) {
+                const char = email.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32-bit integer
+            }
+            return Math.abs(hash).toString().padStart(10, '0').substring(0, 10);
+        }
+
+        // Modal functions
+        function openModal(type) {
+            // Track modal open event
+            analytics.track('Service Modal Opened', {
+                service_type: type,
+                timestamp: new Date().toISOString()
+            });
+
+            const modalId = type + 'Modal';
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Form submissions
+        document.getElementById('personalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            userHash = generateUserHash(data.email);
+            
+            // Identify user in Segment
+            analytics.identify(userHash, {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phone: data.phone,
+                birthDate: data.birthDate
+            });
+
+            // Track product added to cart
+            analytics.track('Product Added', {
+                product_id: 'personal_fortune',
+                product_name: 'Personal Fortune Reading',
+                price: 49.99,
+                currency: 'USD',
+                user_hash: userHash
+            });
+
+            addToCart({
+                type: 'Personal Fortune Reading',
+                price: 49.99,
+                data: data
+            });
+
+            closeModal('personalModal');
+        });
+
+        document.getElementById('compatibilityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            userHash = generateUserHash(data.email);
+            
+            analytics.identify(userHash, {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phone: data.phone
+            });
+
+            analytics.track('Product Added', {
+                product_id: 'compatibility_reading',
+                product_name: 'Compatibility Reading',
+                price: 79.99,
+                currency: 'USD',
+                user_hash: userHash
+            });
+
+            addToCart({
+                type: 'Compatibility Reading',
+                price: 79.99,
+                data: data
+            });
+
+            closeModal('compatibilityModal');
+        });
+
+        document.getElementById('palmForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            userHash = generateUserHash(data.email);
+            
+            analytics.identify(userHash, {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phone: data.phone
+            });
+
+            analytics.track('Product Added', {
+                product_id: 'palm_reading',
+                product_name: 'Digital Palm Reading',
+                price: 39.99,
+                currency: 'USD',
+                user_hash: userHash
+            });
+
+            addToCart({
+                type: 'Digital Palm Reading',
+                price: 39.99,
+                data: data
+            });
+
+            closeModal('palmModal');
+        });
+
+        // Cart functions
+        function addToCart(item) {
+            cart.push(item);
+            updateCartCount();
+            
+            // Show success message
+            alert(`${item.type} added to cart! Total items: ${cart.length}`);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        function viewCart() {
+            if (cart.length === 0) {
+                alert('Your cart is empty. Add some services first!');
+                return;
+            }
+
+            // Track cart view
+            analytics.track('Cart Viewed', {
+                cart_items: cart.length,
+                total_value: cart.reduce((sum, item) => sum + item.price, 0),
+                user_hash: userHash
+            });
+
+            let cartSummary = 'Your Cart:\n\n';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                cartSummary += `${index + 1}. ${item.type} - $${item.price}\n`;
+                total += item.price;
+            });
+            
+            cartSummary += `\nTotal: $${total.toFixed(2)}\n\n`;
+            cartSummary += 'Ready to checkout? Click OK to proceed with payment.';
+            
+            if (confirm(cartSummary)) {
+                checkout();
+            }
+        }
+
+        function checkout() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
+            // Track purchase
+            analytics.track('Order Completed', {
+                order_id: 'ORDER_' + Date.now(),
+                total: total,
+                currency: 'USD',
+                products: cart.map(item => ({
+                    product_id: item.type.toLowerCase().replace(/\s+/g, '_'),
+                    product_name: item.type,
+                    price: item.price
+                })),
+                user_hash: userHash
+            });
+
+            alert(`Thank you for your purchase! Total: $${total.toFixed(2)}\n\nYou will receive your reading within 24-48 hours via email.\n\nOrder confirmation will be sent to your email address.`);
+            
+            // Clear cart after purchase
+            cart = [];
+            updateCartCount();
+        }
+
+        // File upload preview
+        document.getElementById('palmPhoto').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const fileUpload = document.querySelector('.file-upload');
+                fileUpload.innerHTML = `
+                    <p>✅ Photo uploaded: ${file.name}</p>
+                    <p style="font-size: 0.9rem; color: #666;">Click to change photo</p>
+                `;
+            }
+        });
+
+        // Track page interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track page view
+            analytics.page('Fortune Telling Homepage', {
+                title: 'Mystic Fortune - Professional Fortune Telling Services',
+                url: window.location.href
+            });
+
+            // Track service card clicks
+            document.querySelectorAll('.service-card').forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    const serviceName = card.querySelector('h3').textContent;
+                    analytics.track('Service Card Clicked', {
+                        service_name: serviceName,
+                        card_position: index + 1
+                    });
+                });
+            });
+        });
+
+        // Initialize Twilio Flex Webchat
+        const appConfig = {
+            accountSid: "AC0403d08522d2e017a0cf49c2c31c27d1",
+            flexFlowSid: "FOd828936b3f0832aa61779ea3219bc2c5"
+        };
+        
+        // Initialize webchat when page loads
+        window.addEventListener('load', function() {
+            if (typeof Twilio !== 'undefined' && Twilio.FlexWebChat) {
+                Twilio.FlexWebChat.renderWebChat(appConfig);
+            }
+        });
+    </script>
+</body>
+</html>
