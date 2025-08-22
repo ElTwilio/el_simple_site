@@ -523,13 +523,19 @@
             
             userHash = generateUserHash(data.email);
             
-            // Identify user in Segment
             analytics.identify(userHash, {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
                 phone: data.phone,
-                birthDate: data.birthDate
+                birthDate: data.birthDate,
+                birthTime: data.birthTime,
+                timeZone: data.timeZone,
+                birthLatitude: data.latitude,
+                birthLongitude: data.longitude,
+                birthLocation: data.birthLocation,
+                lastServiceType: 'Personal Fortune Reading',
+                lastUpdated: new Date().toISOString()
             });
 
             // Track product added to cart
@@ -561,7 +567,19 @@
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
-                phone: data.phone
+                phone: data.phone,
+                birthDate: data.birthDate,
+                birthTime: data.birthTime,
+                birthLatitude: data.latitude,
+                birthLongitude: data.longitude,
+                partnerFirstName: data.partnerFirstName,
+                partnerLastName: data.partnerLastName,
+                partnerBirthDate: data.partnerBirthDate,
+                partnerBirthTime: data.partnerBirthTime,
+                partnerBirthLatitude: data.partnerLatitude,
+                partnerBirthLongitude: data.partnerLongitude,
+                lastServiceType: 'Compatibility Reading',
+                lastUpdated: new Date().toISOString()
             });
 
             analytics.track('Product Added', {
@@ -588,11 +606,27 @@
             
             userHash = generateUserHash(data.email);
             
+            const palmPhoto = document.getElementById('palmPhoto').files[0];
+            let palmImageUrl = '';
+            
+            if (palmPhoto) {
+                // Create a blob URL for the uploaded image
+                palmImageUrl = URL.createObjectURL(palmPhoto);
+                
+                // In a real implementation, you would upload to a cloud storage service
+                // For now, we'll store the blob URL as a placeholder
+                console.log('[v0] Palm image uploaded:', palmPhoto.name, palmImageUrl);
+            }
+            
             analytics.identify(userHash, {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
-                phone: data.phone
+                phone: data.phone,
+                usershand: palmImageUrl, // Store palm image URL as requested
+                handType: data.handType,
+                lastServiceType: 'Digital Palm Reading',
+                lastUpdated: new Date().toISOString()
             });
 
             analytics.track('Product Added', {
@@ -600,7 +634,8 @@
                 product_name: 'Digital Palm Reading',
                 price: 39.99,
                 currency: 'USD',
-                user_hash: userHash
+                user_hash: userHash,
+                palm_image_uploaded: !!palmPhoto
             });
 
             addToCart({
@@ -710,6 +745,9 @@
         });
 
         // Initialize Twilio Flex Webchat
+        let conversationHistory = [];
+        let currentEngagementId = null;
+
         const appConfig = {
             accountSid: "AC0403d08522d2e017a0cf49c2c31c27d1",
             flexFlowSid: "FOd828936b3f0832aa61779ea3219bc2c5"
@@ -750,6 +788,14 @@
                     },
                     onMessageSent: function(message) {
                         console.log('[v0] Message sent:', message);
+                        
+                        conversationHistory.push({
+                            type: 'sent',
+                            message: message.body || '',
+                            timestamp: new Date().toISOString(),
+                            author: 'customer'
+                        });
+                        
                         analytics.track('Webchat Message Sent', {
                             message_length: message.body ? message.body.length : 0,
                             timestamp: new Date().toISOString(),
@@ -759,6 +805,14 @@
                     },
                     onMessageReceived: function(message) {
                         console.log('[v0] Message received:', message);
+                        
+                        conversationHistory.push({
+                            type: 'received',
+                            message: message.body || '',
+                            timestamp: new Date().toISOString(),
+                            author: message.author || 'agent'
+                        });
+                        
                         analytics.track('Webchat Message Received', {
                             message_length: message.body ? message.body.length : 0,
                             timestamp: new Date().toISOString(),
@@ -769,6 +823,10 @@
                     onEngagementStarted: function(engagement) {
                         console.log('[v0] Chat engagement started:', engagement);
                         window.chatStartTime = Date.now();
+                        currentEngagementId = engagement.sid || 'unknown';
+                        
+                        conversationHistory = [];
+                        
                         analytics.track('Webchat Engagement Started', {
                             engagement_id: engagement.sid || 'unknown',
                             timestamp: new Date().toISOString(),
@@ -778,12 +836,41 @@
                     onEngagementEnded: function(engagement) {
                         console.log('[v0] Chat engagement ended:', engagement);
                         const sessionDuration = Date.now() - (window.chatStartTime || Date.now());
+                        
+                        if (conversationHistory.length > 0 && userHash) {
+                            const today = new Date();
+                            const dateKey = `conversation${today.getMonth().toString().padStart(2, '0')}${today.getDate().toString().padStart(2, '0')}${today.getFullYear()}`;
+                            
+                            const conversationData = {
+                                engagement_id: currentEngagementId,
+                                start_time: new Date(Date.now() - sessionDuration).toISOString(),
+                                end_time: new Date().toISOString(),
+                                duration_ms: sessionDuration,
+                                messages: conversationHistory,
+                                total_messages: conversationHistory.length
+                            };
+                            
+                            // Update user traits with conversation history
+                            const traits = {};
+                            traits[dateKey] = JSON.stringify(conversationData);
+                            traits.lastConversationDate = new Date().toISOString();
+                            traits.totalConversations = (traits.totalConversations || 0) + 1;
+                            
+                            analytics.identify(userHash, traits);
+                            
+                            console.log('[v0] Conversation history stored as trait:', dateKey);
+                        }
+                        
                         analytics.track('Webchat Engagement Ended', {
                             engagement_id: engagement.sid || 'unknown',
                             session_duration: sessionDuration,
                             timestamp: new Date().toISOString(),
-                            user_hash: userHash || 'anonymous'
+                            user_hash: userHash || 'anonymous',
+                            total_messages: conversationHistory.length
                         });
+                        
+                        conversationHistory = [];
+                        currentEngagementId = null;
                     }
                 };
                 
