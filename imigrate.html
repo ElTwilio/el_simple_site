@@ -140,17 +140,16 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            margin-top: 40px;
             flex-wrap: wrap;
-            margin-bottom: 80px;
-            padding: 0 40px;
         }
 
         .photo {
             width: 160px;
             height: 120px;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
         }
 
@@ -425,19 +424,19 @@
         <!-- Family Photos -->
         <div class="family-photos">
             <div class="photo">
-                <img src="/placeholder.svg?height=120&width=160" alt="Happy Family">
+                <img src="https://via.placeholder.com/160x120?text=Happy+Family" alt="Happy Family">
             </div>
             <div class="photo">
-                <img src="/placeholder.svg?height=120&width=160" alt="Mother and Daughter">
+                <img src="https://via.placeholder.com/160x120?text=Mother+and+Daughter" alt="Mother and Daughter">
             </div>
             <div class="photo">
-                <img src="/placeholder.svg?height=120&width=160" alt="Young Couple">
+                <img src="https://via.placeholder.com/160x120?text=Young+Couple" alt="Young Couple">
             </div>
             <div class="photo">
-                <img src="/placeholder.svg?height=120&width=160" alt="Large Family">
+                <img src="https://via.placeholder.com/160x120?text=Large+Family" alt="Large Family">
             </div>
             <div class="photo">
-                <img src="/placeholder.svg?height=120&width=160" alt="Elderly Couple">
+                <img src="https://via.placeholder.com/160x120?text=Elderly+Couple" alt="Elderly Couple">
             </div>
         </div>
     </section>
@@ -725,11 +724,7 @@
             user_authenticated: currentUser !== null,
           })
 
-          if (currentUser) {
-            showApplicationModal()
-          } else {
-            showSignupModal()
-          }
+          showSignupModal()
         }
 
         function showApplicationModal() {
@@ -1088,7 +1083,7 @@
               })
               modal.style.display = "none"
             }
-          }
+          })
         })
 
         // Drag and drop functionality for file uploads
