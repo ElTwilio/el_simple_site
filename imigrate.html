@@ -395,6 +395,115 @@
                 padding: 40px 20px;
             }
         }
+
+        /* Added styles for new resources section and modal */
+        .resources-section {
+            background: rgba(255, 255, 255, 0.98);
+            color: #333;
+            padding: 80px 40px;
+            margin-top: 0;
+        }
+
+        .resources-section h2 {
+            text-align: center;
+            color: #2d5a5a;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: #4a8080;
+        }
+
+        .resource-card i {
+            font-size: 3rem;
+            color: #4a8080;
+            margin-bottom: 20px;
+        }
+
+        .resource-card h3 {
+            color: #2d5a5a;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .resource-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: #4a8080;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .read-more i {
+            font-size: 0.8rem;
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover .read-more i {
+            transform: translateX(5px);
+        }
+
+        .resource-modal-content {
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .resource-modal-content h2 {
+            color: #2d5a5a;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4a8080;
+            padding-bottom: 10px;
+        }
+
+        .resource-modal-content h3 {
+            color: #4a8080;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .resource-modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .resource-modal-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -404,9 +513,10 @@
             <i class="fas fa-globe-americas"></i>
             iMigrate
         </div>
+        <!-- Fixed language selector image URL -->
         <div class="header-right">
             <div class="language-selector" onclick="trackLanguageChange()">
-                <img src="/placeholder.svg?height=20&width=30" alt="English" style="width: 20px; height: 15px;">
+                <img src="/placeholder.svg?height=15&width=20&text=EN" alt="English" style="width: 20px; height: 15px;">
                 <span>EN</span>
                 <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
             </div>
@@ -424,19 +534,73 @@
         <!-- Family Photos -->
         <div class="family-photos">
             <div class="photo">
-                <img src="https://via.placeholder.com/160x120?text=Happy+Family" alt="Happy Family">
+                <!-- Fixed image URLs to use proper placeholder format -->
+                <img src="/placeholder.svg?height=120&width=160&text=Happy+Family" alt="Happy Family">
             </div>
             <div class="photo">
-                <img src="https://via.placeholder.com/160x120?text=Mother+and+Daughter" alt="Mother and Daughter">
+                <img src="/placeholder.svg?height=120&width=160&text=Mother+and+Daughter" alt="Mother and Daughter">
             </div>
             <div class="photo">
-                <img src="https://via.placeholder.com/160x120?text=Young+Couple" alt="Young Couple">
+                <img src="/placeholder.svg?height=120&width=160&text=Young+Couple" alt="Young Couple">
             </div>
             <div class="photo">
-                <img src="https://via.placeholder.com/160x120?text=Large+Family" alt="Large Family">
+                <img src="/placeholder.svg?height=120&width=160&text=Large+Family" alt="Large Family">
             </div>
             <div class="photo">
-                <img src="https://via.placeholder.com/160x120?text=Elderly+Couple" alt="Elderly Couple">
+                <img src="/placeholder.svg?height=120&width=160&text=Elderly+Couple" alt="Elderly Couple">
+            </div>
+        </div>
+    </section>
+
+    <!-- Added new Immigration Resources section with interactive cards -->
+    <!-- Immigration Resources Section -->
+    <section class="resources-section">
+        <div class="container">
+            <h2>Immigration Resources & Information</h2>
+            <p class="section-subtitle">Click on any topic to learn more about your immigration journey</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card" onclick="showResourceModal('visa-types')">
+                    <i class="fas fa-passport"></i>
+                    <h3>Visa Types</h3>
+                    <p>Learn about different visa categories and which one is right for you</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+                
+                <div class="resource-card" onclick="showResourceModal('green-card')">
+                    <i class="fas fa-id-card"></i>
+                    <h3>Green Card Process</h3>
+                    <p>Understanding the path to permanent residency in the United States</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+                
+                <div class="resource-card" onclick="showResourceModal('citizenship')">
+                    <i class="fas fa-flag-usa"></i>
+                    <h3>Path to Citizenship</h3>
+                    <p>Requirements and steps for becoming a U.S. citizen</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+                
+                <div class="resource-card" onclick="showResourceModal('family-immigration')">
+                    <i class="fas fa-heart"></i>
+                    <h3>Family Immigration</h3>
+                    <p>Bringing family members to the United States legally</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+                
+                <div class="resource-card" onclick="showResourceModal('work-permits')">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Work Authorization</h3>
+                    <p>Employment-based immigration and work permits</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
+                
+                <div class="resource-card" onclick="showResourceModal('asylum-refugee')">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Asylum & Refugee Status</h3>
+                    <p>Protection for those fleeing persecution or violence</p>
+                    <span class="read-more">Click to read more <i class="fas fa-arrow-right"></i></span>
+                </div>
             </div>
         </div>
     </section>
@@ -626,6 +790,17 @@
                     <button type="button" class="btn btn-outline" onclick="nextApplicationStep(2)">Back</button>
                     <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Added Resource Modal for displaying immigration information -->
+    <!-- Resource Modal -->
+    <div id="resourceModal" class="modal">
+        <div class="modal-content resource-modal-content">
+            <span class="close" onclick="closeResourceModal()">&times;</span>
+            <div id="resourceContent">
+                <!-- Content will be dynamically loaded here -->
             </div>
         </div>
     </div>
@@ -1113,6 +1288,323 @@
             }
           }
         })
+
+        function showResourceModal(resourceType) {
+            const modal = document.getElementById('resourceModal');
+            const content = document.getElementById('resourceContent');
+            
+            // Track resource engagement
+            analytics.track('Resource Viewed', {
+                resource_type: resourceType,
+                resource_category: 'Immigration Information',
+                engagement_type: 'modal_open',
+                timestamp: new Date().toISOString(),
+                page_section: 'resources'
+            });
+
+            // Track time spent reading
+            const startTime = Date.now();
+            
+            const resourceData = {
+                'visa-types': {
+                    title: 'Understanding Visa Types',
+                    content: `
+                        <h2><i class="fas fa-passport"></i> Understanding Visa Types</h2>
+                        <p>Choosing the right visa is crucial for your immigration journey. Here are the main categories:</p>
+                        
+                        <h3>Family-Based Visas</h3>
+                        <ul>
+                            <li><strong>IR-1/CR-1:</strong> Spouse of U.S. citizen</li>
+                            <li><strong>IR-2/CR-2:</strong> Unmarried child under 21 of U.S. citizen</li>
+                            <li><strong>F1:</strong> Unmarried adult children of U.S. citizens</li>
+                            <li><strong>F2A/F2B:</strong> Spouses and children of permanent residents</li>
+                        </ul>
+                        
+                        <h3>Employment-Based Visas</h3>
+                        <ul>
+                            <li><strong>EB-1:</strong> Priority workers (extraordinary ability, outstanding researchers)</li>
+                            <li><strong>EB-2:</strong> Advanced degree professionals</li>
+                            <li><strong>EB-3:</strong> Skilled workers and professionals</li>
+                            <li><strong>EB-5:</strong> Investor visas</li>
+                        </ul>
+                        
+                        <h3>Temporary Visas</h3>
+                        <ul>
+                            <li><strong>H-1B:</strong> Specialty occupation workers</li>
+                            <li><strong>L-1:</strong> Intracompany transferees</li>
+                            <li><strong>O-1:</strong> Individuals with extraordinary ability</li>
+                            <li><strong>TN:</strong> NAFTA professionals</li>
+                        </ul>
+                        
+                        <p><strong>Next Steps:</strong> Our experts can help determine which visa category best fits your situation and guide you through the application process.</p>
+                    `
+                },
+                'green-card': {
+                    title: 'Green Card Process',
+                    content: `
+                        <h2><i class="fas fa-id-card"></i> Path to Permanent Residency</h2>
+                        <p>A Green Card grants you permanent resident status in the United States. Here's what you need to know:</p>
+                        
+                        <h3>Eligibility Categories</h3>
+                        <ul>
+                            <li><strong>Family Sponsorship:</strong> Through qualifying family relationships</li>
+                            <li><strong>Employment:</strong> Through job offers or special skills</li>
+                            <li><strong>Investment:</strong> Through significant business investment (EB-5)</li>
+                            <li><strong>Diversity Lottery:</strong> Annual random selection program</li>
+                            <li><strong>Asylum/Refugee:</strong> After one year of protected status</li>
+                        </ul>
+                        
+                        <h3>Application Process</h3>
+                        <ul>
+                            <li><strong>Step 1:</strong> Determine eligibility and file petition</li>
+                            <li><strong>Step 2:</strong> Wait for priority date to become current</li>
+                            <li><strong>Step 3:</strong> File Form I-485 (if in U.S.) or consular processing</li>
+                            <li><strong>Step 4:</strong> Attend biometrics appointment</li>
+                            <li><strong>Step 5:</strong> Complete interview (if required)</li>
+                            <li><strong>Step 6:</strong> Receive decision</li>
+                        </ul>
+                        
+                        <h3>Processing Times</h3>
+                        <p>Processing times vary significantly based on your category and country of birth. Family-based applications can take 1-20+ years, while employment-based applications typically take 1-10+ years.</p>
+                        
+                        <p><strong>Important:</strong> Maintaining legal status throughout the process is crucial. We can help you navigate complex timing and requirements.</p>
+                    `
+                },
+                'citizenship': {
+                    title: 'Path to U.S. Citizenship',
+                    content: `
+                        <h2><i class="fas fa-flag-usa"></i> Becoming a U.S. Citizen</h2>
+                        <p>U.S. citizenship is the final step in your immigration journey, providing full rights and protections.</p>
+                        
+                        <h3>Eligibility Requirements</h3>
+                        <ul>
+                            <li><strong>Age:</strong> Must be 18 or older</li>
+                            <li><strong>Residency:</strong> Permanent resident for at least 5 years (3 years if married to U.S. citizen)</li>
+                            <li><strong>Physical Presence:</strong> At least 30 months in U.S. during 5-year period</li>
+                            <li><strong>Continuous Residence:</strong> No trips outside U.S. longer than 6 months</li>
+                            <li><strong>English Proficiency:</strong> Ability to read, write, and speak basic English</li>
+                            <li><strong>Civics Knowledge:</strong> Knowledge of U.S. history and government</li>
+                            <li><strong>Good Moral Character:</strong> No serious criminal history</li>
+                        </ul>
+                        
+                        <h3>Application Process (Form N-400)</h3>
+                        <ul>
+                            <li><strong>Step 1:</strong> Complete and file Form N-400</li>
+                            <li><strong>Step 2:</strong> Attend biometrics appointment</li>
+                            <li><strong>Step 3:</strong> Complete naturalization interview and tests</li>
+                            <li><strong>Step 4:</strong> Receive decision</li>
+                            <li><strong>Step 5:</strong> Take Oath of Allegiance ceremony</li>
+                        </ul>
+                        
+                        <h3>Benefits of Citizenship</h3>
+                        <ul>
+                            <li>Right to vote in federal elections</li>
+                            <li>Eligibility for federal jobs</li>
+                            <li>Protection from deportation</li>
+                            <li>Ability to sponsor more family members</li>
+                            <li>U.S. passport for international travel</li>
+                        </ul>
+                        
+                        <p><strong>Preparation is Key:</strong> We offer comprehensive citizenship test preparation and application assistance to maximize your chances of success.</p>
+                    `
+                },
+                'family-immigration': {
+                    title: 'Family Immigration',
+                    content: `
+                        <h2><i class="fas fa-heart"></i> Bringing Family to the United States</h2>
+                        <p>Family reunification is a cornerstone of U.S. immigration policy. Here's how to bring your loved ones to America:</p>
+                        
+                        <h3>Who Can Sponsor Family Members</h3>
+                        <ul>
+                            <li><strong>U.S. Citizens can sponsor:</strong> Spouses, children, parents, and siblings</li>
+                            <li><strong>Permanent Residents can sponsor:</strong> Spouses and unmarried children only</li>
+                        </ul>
+                        
+                        <h3>Immediate Relatives (No Wait Time)</h3>
+                        <ul>
+                            <li>Spouses of U.S. citizens</li>
+                            <li>Unmarried children under 21 of U.S. citizens</li>
+                            <li>Parents of U.S. citizens (if citizen is 21 or older)</li>
+                        </ul>
+                        
+                        <h3>Family Preference Categories (Limited Annual Numbers)</h3>
+                        <ul>
+                            <li><strong>F1:</strong> Unmarried adult children of U.S. citizens</li>
+                            <li><strong>F2A:</strong> Spouses and unmarried children under 21 of permanent residents</li>
+                            <li><strong>F2B:</strong> Unmarried adult children of permanent residents</li>
+                            <li><strong>F3:</strong> Married children of U.S. citizens</li>
+                            <li><strong>F4:</strong> Siblings of U.S. citizens</li>
+                        </ul>
+                        
+                        <h3>Required Documents</h3>
+                        <ul>
+                            <li>Proof of relationship (birth certificates, marriage certificates)</li>
+                            <li>Proof of sponsor's status (citizenship or green card)</li>
+                            <li>Financial support documentation (Form I-864)</li>
+                            <li>Medical examinations</li>
+                            <li>Police clearances</li>
+                        </ul>
+                        
+                        <p><strong>Complex Process:</strong> Family immigration involves multiple forms, strict deadlines, and detailed documentation. Our experienced team guides families through every step.</p>
+                    `
+                },
+                'work-permits': {
+                    title: 'Work Authorization',
+                    content: `
+                        <h2><i class="fas fa-briefcase"></i> Working Legally in the United States</h2>
+                        <p>There are several pathways to obtain work authorization in the United States, each with specific requirements and benefits.</p>
+                        
+                        <h3>Employment Authorization Document (EAD)</h3>
+                        <p>Form I-765 allows certain individuals to work legally in the U.S. for a specific period.</p>
+                        
+                        <h3>Who Can Apply for Work Authorization</h3>
+                        <ul>
+                            <li><strong>Asylum seekers:</strong> 150 days after filing (with no decision)</li>
+                            <li><strong>Spouses of certain visa holders:</strong> H-4, L-2, E-2 dependents</li>
+                            <li><strong>Students:</strong> F-1 OPT, CPT; J-1 academic training</li>
+                            <li><strong>Adjustment of status applicants:</strong> Pending green card applications</li>
+                            <li><strong>TPS beneficiaries:</strong> Temporary Protected Status holders</li>
+                            <li><strong>DACA recipients:</strong> Deferred Action for Childhood Arrivals</li>
+                        </ul>
+                        
+                        <h3>Employment-Based Immigration</h3>
+                        <ul>
+                            <li><strong>EB-1:</strong> Priority workers (no labor certification required)</li>
+                            <li><strong>EB-2:</strong> Advanced degree professionals (may need PERM)</li>
+                            <li><strong>EB-3:</strong> Skilled workers (requires PERM labor certification)</li>
+                            <li><strong>EB-4:</strong> Special immigrants (religious workers, etc.)</li>
+                            <li><strong>EB-5:</strong> Investor program ($800K-$1.05M investment)</li>
+                        </ul>
+                        
+                        <h3>Temporary Work Visas</h3>
+                        <ul>
+                            <li><strong>H-1B:</strong> Specialty occupations (bachelor's degree required)</li>
+                            <li><strong>L-1:</strong> Intracompany transfers (managers, executives, specialized knowledge)</li>
+                            <li><strong>O-1:</strong> Extraordinary ability in sciences, arts, business, athletics</li>
+                            <li><strong>TN:</strong> NAFTA professionals (Canadian and Mexican citizens)</li>
+                        </ul>
+                        
+                        <p><strong>Strategic Planning:</strong> Work authorization strategies often involve multiple steps and careful timing. We help you choose the best path for your career goals.</p>
+                    `
+                },
+                'asylum-refugee': {
+                    title: 'Asylum & Refugee Protection',
+                    content: `
+                        <h2><i class="fas fa-shield-alt"></i> Protection for Those Fleeing Persecution</h2>
+                        <p>The United States provides protection for individuals who cannot return to their home countries due to persecution or well-founded fear of persecution.</p>
+                        
+                        <h3>Asylum vs. Refugee Status</h3>
+                        <ul>
+                            <li><strong>Asylum:</strong> Applied for by individuals already in the United States</li>
+                            <li><strong>Refugee:</strong> Applied for by individuals outside the United States</li>
+                        </ul>
+                        
+                        <h3>Grounds for Protection</h3>
+                        <p>Persecution or well-founded fear of persecution based on:</p>
+                        <ul>
+                            <li><strong>Race:</strong> Ethnic or racial identity</li>
+                            <li><strong>Religion:</strong> Religious beliefs or practices</li>
+                            <li><strong>Nationality:</strong> Country of origin or citizenship</li>
+                            <li><strong>Political Opinion:</strong> Political beliefs or activities</li>
+                            <li><strong>Membership in Particular Social Group:</strong> Shared characteristics like gender, sexual orientation, family ties</li>
+                        </ul>
+                        
+                        <h3>Asylum Application Process</h3>
+                        <ul>
+                            <li><strong>One-Year Deadline:</strong> Must apply within one year of arrival (with limited exceptions)</li>
+                            <li><strong>Form I-589:</strong> Application for asylum and for withholding of removal</li>
+                            <li><strong>Interview or Hearing:</strong> Present your case to an asylum officer or immigration judge</li>
+                            <li><strong>Decision:</strong> Grant, denial, or referral to immigration court</li>
+                        </ul>
+                        
+                        <h3>Benefits if Granted</h3>
+                        <ul>
+                            <li>Protection from return to country of feared persecution</li>
+                            <li>Work authorization</li>
+                            <li>Ability to include spouse and unmarried children under 21</li>
+                            <li>Eligibility to apply for green card after one year</li>
+                            <li>Potential path to U.S. citizenship</li>
+                        </ul>
+                        
+                        <h3>Special Considerations</h3>
+                        <ul>
+                            <li><strong>Credibility:</strong> Consistent, detailed testimony is crucial</li>
+                            <li><strong>Country Conditions:</strong> Evidence of persecution in home country</li>
+                            <li><strong>Trauma-Informed Approach:</strong> Understanding impact of persecution on memory and testimony</li>
+                        </ul>
+                        
+                        <p><strong>Sensitive Cases:</strong> Asylum cases require careful preparation and cultural sensitivity. Our experienced attorneys understand the complexities and provide compassionate representation.</p>
+                    `
+                }
+            };
+
+            content.innerHTML = resourceData[resourceType].content;
+            modal.style.display = 'block';
+            
+            // Track modal close to calculate time spent
+            window.resourceStartTime = startTime;
+            window.currentResource = resourceType;
+        }
+
+        function closeResourceModal() {
+            const modal = document.getElementById('resourceModal');
+            modal.style.display = 'block';
+            
+            // Track time spent reading resource
+            if (window.resourceStartTime && window.currentResource) {
+                const timeSpent = Math.round((Date.now() - window.resourceStartTime) / 1000);
+                
+                analytics.track('Resource Engagement Completed', {
+                    resource_type: window.currentResource,
+                    time_spent_seconds: timeSpent,
+                    engagement_level: timeSpent > 30 ? 'high' : timeSpent > 10 ? 'medium' : 'low',
+                    completion_type: 'modal_close',
+                    timestamp: new Date().toISOString()
+                });
+            }
+            
+            modal.style.display = 'none';
+        }
+
+        let resourceSectionViewed = false;
+        
+        function trackScrollDepth() {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            
+            // Track resource section view
+            const resourceSection = document.querySelector('.resources-section');
+            if (resourceSection && !resourceSectionViewed) {
+                const rect = resourceSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    resourceSectionViewed = true;
+                    analytics.track('Resource Section Viewed', {
+                        section: 'immigration_resources',
+                        scroll_depth: scrollPercent,
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            }
+            
+            // Existing scroll depth tracking
+            if (scrollPercent >= 25 && !window.scroll25) {
+                window.scroll25 = true;
+                analytics.track('Page Scroll Depth', { depth: '25%', page: 'homepage' });
+            }
+            if (scrollPercent >= 50 && !window.scroll50) {
+                window.scroll50 = true;
+                analytics.track('Page Scroll Depth', { depth: '50%', page: 'homepage' });
+            }
+            if (scrollPercent >= 75 && !window.scroll75) {
+                window.scroll75 = true;
+                analytics.track('Page Scroll Depth', { depth: '75%', page: 'homepage' });
+            }
+            if (scrollPercent >= 90 && !window.scroll90) {
+                window.scroll90 = true;
+                analytics.track('Page Scroll Depth', { depth: '100%', page: 'homepage' });
+            }
+        }
+
+        window.addEventListener('scroll', trackScrollDepth);
     </script>
 </body>
 </html>
