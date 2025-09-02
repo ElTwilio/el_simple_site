@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMigrate - Make Your Dreams Real</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Segment Analytics Script -->
+    <script>
+      !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="rjeEmySbA3mHw00R8WOV8tmv8Mxdw0xi";;analytics.SNIPPET_VERSION="5.2.0";
+      analytics.load("rjeEmySbA3mHw00R8WOV8tmv8Mxdw0xi");
+      analytics.page();
+      }}();
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5a5a 0%, #4a8080 50%, #2d5a5a 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            color: #ffd700;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #2d5a5a;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #2d5a5a;
+            border: 2px solid #ffd700;
+        }
+
+        .btn-primary:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            font-size: 1.1rem;
+            padding: 16px 40px;
+            margin-bottom: 80px;
+        }
+
+        .family-photos {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+            padding: 0 40px;
+        }
+
+        .photo {
+            width: 160px;
+            height: 120px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .photo:hover {
+            transform: translateY(-5px);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 80px 40px;
+            margin-top: 100px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: #4a8080;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2d5a5a;
+        }
+
+        .feature p {
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .process-steps {
+            margin-top: 60px;
+        }
+
+        .process-steps h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #2d5a5a;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .step {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: #ffd700;
+            color: #2d5a5a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step h4 {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            color: #2d5a5a;
+            font-size: 1.3rem;
+        }
+
+        .step p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            color: #333;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d5a5a;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4a8080;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .upload-area:hover {
+            border-color: #4a8080;
+            background: #f8f9fa;
+        }
+
+        .upload-area.dragover {
+            border-color: #4a8080;
+            background: #e8f4f8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4a8080, #2d5a5a);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .family-photos {
+                padding: 0 20px;
+            }
+
+            .photo {
+                width: 140px;
+                height: 100px;
+            }
+
+            .content-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-globe-americas"></i>
+            iMigrate
+        </div>
+        <div class="header-right">
+            <div class="language-selector" onclick="trackLanguageChange()">
+                <img src="/placeholder.svg?height=20&width=30" alt="English" style="width: 20px; height: 15px;">
+                <span>EN</span>
+                <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </div>
+            <a href="#" class="btn btn-outline" onclick="showLoginModal()">Log In</a>
+            <a href="#" class="btn btn-primary" onclick="startProcess()">Start My Process</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>At iMigrate, we're here to help make<br>your dreams real.</h1>
+        <p>Go ahead with your paperwork—no fear needed. At iMigrate, we explain everything clearly and guide you step by step—for a fair price.</p>
+        <a href="#" class="btn btn-primary cta-button" onclick="startProcess()">Start My Process</a>
+        
+        <!-- Family Photos -->
+        <div class="family-photos">
+            <div class="photo">
+                <img src="/placeholder.svg?height=120&width=160" alt="Happy Family">
+            </div>
+            <div class="photo">
+                <img src="/placeholder.svg?height=120&width=160" alt="Mother and Daughter">
+            </div>
+            <div class="photo">
+                <img src="/placeholder.svg?height=120&width=160" alt="Young Couple">
+            </div>
+            <div class="photo">
+                <img src="/placeholder.svg?height=120&width=160" alt="Large Family">
+            </div>
+            <div class="photo">
+                <img src="/placeholder.svg?height=120&width=160" alt="Elderly Couple">
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure & Confidential</h3>
+                    <p>Your personal information is protected with bank-level security. We never share your data without your explicit consent.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <h3>Expert Legal Support</h3>
+                    <p>Our team of experienced immigration attorneys and legal experts guide you through every step of your journey.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>Fast Processing</h3>
+                    <p>We streamline the immigration process to help you achieve your goals as quickly and efficiently as possible.</p>
+                </div>
+            </div>
+
+            <div class="process-steps">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Create Your Account</h4>
+                        <p>Sign up and tell us about your immigration goals. We'll create a personalized plan just for you.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Complete Your Application</h4>
+                        <p>Fill out your forms with our guided assistance. We'll help you avoid common mistakes and delays.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Upload Documents</h4>
+                        <p>Securely upload all required documents. Our system will verify everything is complete and correct.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Submit & Track</h4>
+                        <p>We'll submit your application and keep you updated on its progress every step of the way.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="color: #2d5a5a; margin-bottom: 30px;">Welcome Back</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Log In</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px;">
+                Don't have an account? <a href="#" onclick="closeModal('loginModal'); showSignupModal();" style="color: #4a8080;">Sign up here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2 style="color: #2d5a5a; margin-bottom: 30px;">Create Your Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country of Origin</label>
+                    <select id="country" name="country" required>
+                        <option value="">Select your country</option>
+                        <option value="mexico">Mexico</option>
+                        <option value="colombia">Colombia</option>
+                        <option value="venezuela">Venezuela</option>
+                        <option value="guatemala">Guatemala</option>
+                        <option value="honduras">Honduras</option>
+                        <option value="el-salvador">El Salvador</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Application Modal -->
+    <div id="applicationModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close" onclick="closeModal('applicationModal')">&times;</span>
+            <h2 style="color: #2d5a5a; margin-bottom: 30px;">Immigration Application</h2>
+            
+            <div id="applicationStep1" class="application-step">
+                <h3 style="color: #4a8080; margin-bottom: 20px;">Step 1: Personal Information</h3>
+                <form id="personalInfoForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Legal Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth</label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Nationality</label>
+                        <input type="text" id="nationality" name="nationality" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentAddress">Current Address</label>
+                        <input type="text" id="currentAddress" name="currentAddress" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="nextApplicationStep(2)">Continue</button>
+                </form>
+            </div>
+
+            <div id="applicationStep2" class="application-step" style="display: none;">
+                <h3 style="color: #4a8080; margin-bottom: 20px;">Step 2: Document Upload</h3>
+                <p style="margin-bottom: 20px;">Please upload the required documents:</p>
+                
+                <div class="upload-area" onclick="document.getElementById('passportUpload').click()">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #4a8080; margin-bottom: 10px;"></i>
+                    <p><strong>Upload Passport</strong></p>
+                    <p style="font-size: 14px; color: #666;">Click here or drag and drop your passport scan</p>
+                    <input type="file" id="passportUpload" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileUpload(this, 'passport')">
+                </div>
+
+                <div class="upload-area" onclick="document.getElementById('idUpload').click()">
+                    <i class="fas fa-id-card" style="font-size: 2rem; color: #4a8080; margin-bottom: 10px;"></i>
+                    <p><strong>Upload Government ID</strong></p>
+                    <p style="font-size: 14px; color: #666;">Click here or drag and drop your ID scan</p>
+                    <input type="file" id="idUpload" style="display: none;" accept=".pdf,.jpg,.jpeg,.png" onchange="handleFileUpload(this, 'id')">
+                </div>
+
+                <div class="progress-bar" id="uploadProgress">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" class="btn btn-outline" onclick="nextApplicationStep(1)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextApplicationStep(3)" id="continueStep2" disabled>Continue</button>
+                </div>
+            </div>
+
+            <div id="applicationStep3" class="application-step" style="display: none;">
+                <h3 style="color: #4a8080; margin-bottom: 20px;">Step 3: Review & Submit</h3>
+                <p style="margin-bottom: 20px;">Please review your information before submitting:</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #2d5a5a; margin-bottom: 15px;">Application Summary</h4>
+                    <div id="applicationSummary"></div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" class="btn btn-outline" onclick="nextApplicationStep(2)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="submitApplication()">Submit Application</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Declare the analytics variable or import it as needed
+        const analytics = window.analytics || {}
+
+        // Segment Analytics Helper Functions
+        function trackEvent(eventName, properties = {}) {
+          if (typeof analytics !== "undefined") {
+            analytics.track(eventName, {
+              ...properties,
+              timestamp: new Date().toISOString(),
+              page: window.location.pathname,
+              url: window.location.href,
+            })
+            console.log(`[Segment] Tracked event: ${eventName}`, properties)
+          }
+        }
+
+        function identifyUser(userId, traits = {}) {
+          if (typeof analytics !== "undefined") {
+            analytics.identify(userId, traits)
+            console.log(`[Segment] Identified user: ${userId}`, traits)
+          }
+        }
+
+        function trackPage(pageName, properties = {}) {
+          if (typeof analytics !== "undefined") {
+            analytics.page(pageName, properties)
+            console.log(`[Segment] Page view: ${pageName}`, properties)
+          }
+        }
+
+        // Global variables
+        let currentUser = null
+        const applicationData = {}
+        const uploadedFiles = {}
+
+        // Page load tracking
+        document.addEventListener("DOMContentLoaded", () => {
+          trackPage("Homepage", {
+            section: "landing",
+            user_type: "anonymous",
+          })
+
+          // Track time spent on page
+          const startTime = Date.now()
+          window.addEventListener("beforeunload", () => {
+            const timeSpent = Math.round((Date.now() - startTime) / 1000)
+            trackEvent("Page Time Spent", {
+              page: "homepage",
+              time_seconds: timeSpent,
+            })
+          })
+        })
+
+        // Language change tracking
+        function trackLanguageChange() {
+          trackEvent("Language Changed", {
+            previous_language: "en",
+            new_language: "es",
+            location: "header",
+          })
+          alert("Language switching functionality would be implemented here")
+        }
+
+        // Modal functions
+        function showLoginModal() {
+          document.getElementById("loginModal").style.display = "block"
+          trackEvent("Login Modal Opened", {
+            source: "header_button",
+          })
+        }
+
+        function showSignupModal() {
+          document.getElementById("signupModal").style.display = "block"
+          trackEvent("Signup Modal Opened", {
+            source: "login_modal_link",
+          })
+        }
+
+        function closeModal(modalId) {
+          document.getElementById(modalId).style.display = "none"
+          trackEvent("Modal Closed", {
+            modal_type: modalId.replace("Modal", ""),
+            action: "close_button",
+          })
+        }
+
+        // Start process function
+        function startProcess() {
+          trackEvent("Start Process Clicked", {
+            button_location: "hero_section",
+            user_authenticated: currentUser !== null,
+          })
+
+          if (currentUser) {
+            showApplicationModal()
+          } else {
+            showSignupModal()
+          }
+        }
+
+        function showApplicationModal() {
+          document.getElementById("applicationModal").style.display = "block"
+          trackEvent("Application Started", {
+            user_id: currentUser?.id,
+            step: 1,
+          })
+        }
+
+        // Login form handling
+        document.getElementById("loginForm").addEventListener("submit", (e) => {
+          e.preventDefault()
+
+          const email = document.getElementById("email").value
+          const password = document.getElementById("password").value
+
+          // Simulate login
+          currentUser = {
+            id: "user_" + Date.now(),
+            email: email,
+            login_method: "email_password",
+          }
+
+          identifyUser(currentUser.id, {
+            email: email,
+            login_method: "email_password",
+            account_type: "returning_user",
+          })
+
+          trackEvent("User Logged In", {
+            user_id: currentUser.id,
+            email: email,
+            login_method: "email_password",
+          })
+
+          closeModal("loginModal")
+          alert("Login successful! You can now start your application process.")
+        })
+
+        // Signup form handling
+        document.getElementById("signupForm").addEventListener("submit", (e) => {
+          e.preventDefault()
+
+          const formData = new FormData(e.target)
+          const userData = Object.fromEntries(formData.entries())
+
+          // Simulate account creation
+          currentUser = {
+            id: "user_" + Date.now(),
+            email: userData.email,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            phone: userData.phone,
+            country: userData.country,
+          }
+
+          identifyUser(currentUser.id, {
+            email: userData.email,
+            first_name: userData.firstName,
+            last_name: userData.lastName,
+            phone: userData.phone,
+            country_of_origin: userData.country,
+            account_type: "new_user",
+            signup_method: "email",
+          })
+
+          trackEvent("Account Created", {
+            user_id: currentUser.id,
+            email: userData.email,
+            country_of_origin: userData.country,
+            signup_method: "email",
+            referral_source: "direct",
+          })
+
+          closeModal("signupModal")
+          alert("Account created successfully! You can now start your application.")
+
+          // Automatically show application modal
+          setTimeout(() => {
+            showApplicationModal()
+          }, 1000)
+        })
+
+        // Application step navigation
+        function nextApplicationStep(step) {
+          // Hide all steps
+          document.querySelectorAll(".application-step").forEach((el) => {
+            el.style.display = "none"
+          })
+
+          // Show target step
+          document.getElementById(`applicationStep${step}`).style.display = "block"
+
+          trackEvent("Application Step Changed", {
+            user_id: currentUser?.id,
+            from_step: getCurrentStep(),
+            to_step: step,
+            direction: step > getCurrentStep() ? "forward" : "backward",
+          })
+
+          // Handle step-specific logic
+          if (step === 3) {
+            displayApplicationSummary()
+          }
+        }
+
+        function getCurrentStep() {
+          const steps = document.querySelectorAll(".application-step")
+          for (let i = 0; i < steps.length; i++) {
+            if (steps[i].style.display !== "none") {
+              return i + 1
+            }
+          }
+          return 1
+        }
+
+        // Personal info form handling
+        document.getElementById("personalInfoForm").addEventListener("submit", (e) => {
+          e.preventDefault()
+
+          const formData = new FormData(e.target)
+          applicationData.personalInfo = Object.fromEntries(formData.entries())
+
+          trackEvent("Personal Information Completed", {
+            user_id: currentUser?.id,
+            nationality: applicationData.personalInfo.nationality,
+          })
+
+          nextApplicationStep(2)
+        })
+
+        // File upload handling
+        function handleFileUpload(input, documentType) {
+          const file = input.files[0]
+          if (!file) return
+
+          trackEvent("Document Upload Started", {
+            user_id: currentUser?.id,
+            document_type: documentType,
+            file_size: file.size,
+            file_type: file.type,
+          })
+
+          // Simulate upload progress
+          const progressBar = document.getElementById("uploadProgress")
+          const progressFill = document.getElementById("progressFill")
+
+          progressBar.style.display = "block"
+
+          let progress = 0
+          const interval = setInterval(() => {
+            progress += Math.random() * 30
+            if (progress >= 100) {
+              progress = 100
+              clearInterval(interval)
+
+              uploadedFiles[documentType] = {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                uploadTime: new Date().toISOString(),
+              }
+
+              trackEvent("Document Uploaded", {
+                user_id: currentUser?.id,
+                document_type: documentType,
+                file_name: file.name,
+                file_size: file.size,
+                upload_duration: "2.3s",
+              })
+
+              // Special tracking for ID submission
+              if (documentType === "id") {
+                trackEvent("ID Submitted", {
+                  user_id: currentUser?.id,
+                  document_type: "government_id",
+                  verification_status: "pending",
+                })
+              }
+
+              checkUploadCompletion()
+
+              setTimeout(() => {
+                progressBar.style.display = "none"
+                progressFill.style.width = "0%"
+              }, 1000)
+            }
+
+            progressFill.style.width = progress + "%"
+          }, 200)
+        }
+
+        function checkUploadCompletion() {
+          const requiredDocs = ["passport", "id"]
+          const uploadedDocs = Object.keys(uploadedFiles)
+          const allUploaded = requiredDocs.every((doc) => uploadedDocs.includes(doc))
+
+          document.getElementById("continueStep2").disabled = !allUploaded
+
+          if (allUploaded) {
+            trackEvent("All Documents Uploaded", {
+              user_id: currentUser?.id,
+              document_count: uploadedDocs.length,
+              documents: uploadedDocs,
+            })
+          }
+        }
+
+        // Application summary display
+        function displayApplicationSummary() {
+          const summary = document.getElementById("applicationSummary")
+          const personalInfo = applicationData.personalInfo || {}
+          const documents = Object.keys(uploadedFiles)
+
+          summary.innerHTML = `
+                <p><strong>Name:</strong> ${personalInfo.fullName || "Not provided"}</p>
+                <p><strong>Date of Birth:</strong> ${personalInfo.dateOfBirth || "Not provided"}</p>
+                <p><strong>Nationality:</strong> ${personalInfo.nationality || "Not provided"}</p>
+                <p><strong>Address:</strong> ${personalInfo.currentAddress || "Not provided"}</p>
+                <p><strong>Documents Uploaded:</strong> ${documents.join(", ") || "None"}</p>
+            `
+        }
+
+        // Application submission
+        function submitApplication() {
+          const applicationId = "app_" + Date.now()
+
+          trackEvent("Application Submitted", {
+            user_id: currentUser?.id,
+            application_id: applicationId,
+            documents_count: Object.keys(uploadedFiles).length,
+            completion_time: new Date().toISOString(),
+            application_type: "immigration_assistance",
+          })
+
+          // Update user profile with application status
+          identifyUser(currentUser.id, {
+            application_status: "submitted",
+            application_id: applicationId,
+            last_activity: new Date().toISOString(),
+          })
+
+          closeModal("applicationModal")
+
+          alert(
+            `Application submitted successfully! Your application ID is: ${applicationId}. You will receive updates via email.`,
+          )
+
+          // Track successful conversion
+          trackEvent("Application Conversion", {
+            user_id: currentUser?.id,
+            application_id: applicationId,
+            conversion_value: 299, // Estimated service value
+            conversion_type: "application_submission",
+          })
+        }
+
+        // Additional tracking events
+        document.addEventListener("click", (e) => {
+          // Track CTA button clicks
+          if (e.target.classList.contains("btn-primary")) {
+            trackEvent("CTA Button Clicked", {
+              button_text: e.target.textContent.trim(),
+              button_location: getButtonLocation(e.target),
+              user_authenticated: currentUser !== null,
+            })
+          }
+
+          // Track feature clicks
+          if (e.target.closest(".feature")) {
+            const feature = e.target.closest(".feature")
+            const featureTitle = feature.querySelector("h3").textContent
+            trackEvent("Feature Clicked", {
+              feature_name: featureTitle,
+              section: "features",
+            })
+          }
+
+          // Track step clicks
+          if (e.target.closest(".step")) {
+            const step = e.target.closest(".step")
+            const stepTitle = step.querySelector("h4").textContent
+            trackEvent("Process Step Viewed", {
+              step_name: stepTitle,
+              section: "how_it_works",
+            })
+          }
+        })
+
+        function getButtonLocation(button) {
+          if (button.closest(".hero")) return "hero_section"
+          if (button.closest(".header")) return "header"
+          if (button.closest(".modal")) return "modal"
+          return "unknown"
+        }
+
+        // Scroll tracking
+        const scrollTracked = {
+          25: false,
+          50: false,
+          75: false,
+          100: false,
+        }
+
+        window.addEventListener("scroll", () => {
+          const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100)
+
+          Object.keys(scrollTracked).forEach((threshold) => {
+            if (scrollPercent >= threshold && !scrollTracked[threshold]) {
+              scrollTracked[threshold] = true
+              trackEvent("Page Scroll", {
+                scroll_depth: threshold + "%",
+                page: "homepage",
+              })
+            }
+          })
+        })
+
+        // Exit intent tracking
+        document.addEventListener("mouseleave", (e) => {
+          if (e.clientY <= 0) {
+            trackEvent("Exit Intent", {
+              page: "homepage",
+              time_on_page: Math.round((Date.now() - performance.timing.navigationStart) / 1000),
+              user_authenticated: currentUser !== null,
+            })
+          }
+        })
+
+        // Form abandonment tracking
+        const formStartTimes = {}
+
+        document.addEventListener("focusin", (e) => {
+          if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT") {
+            const form = e.target.closest("form")
+            if (form && !formStartTimes[form.id]) {
+              formStartTimes[form.id] = Date.now()
+              trackEvent("Form Started", {
+                form_type: form.id,
+                field_name: e.target.name,
+              })
+            }
+          }
+        })
+
+        // Close modals when clicking outside
+        window.addEventListener("click", (e) => {
+          const modals = document.querySelectorAll(".modal")
+          modals.forEach((modal) => {
+            if (e.target === modal) {
+              const modalType = modal.id.replace("Modal", "")
+              trackEvent("Modal Closed", {
+                modal_type: modalType,
+                action: "click_outside",
+              })
+              modal.style.display = "none"
+            }
+          }
+        })
+
+        // Drag and drop functionality for file uploads
+        document.addEventListener("dragover", (e) => {
+          e.preventDefault()
+          if (e.target.classList.contains("upload-area")) {
+            e.target.classList.add("dragover")
+          }
+        })
+
+        document.addEventListener("dragleave", (e) => {
+          if (e.target.classList.contains("upload-area")) {
+            e.target.classList.remove("dragover")
+          }
+        })
+
+        document.addEventListener("drop", (e) => {
+          e.preventDefault()
+          if (e.target.classList.contains("upload-area")) {
+            e.target.classList.remove("dragover")
+            const files = e.dataTransfer.files
+            if (files.length > 0) {
+              const input = e.target.querySelector('input[type="file"]')
+              input.files = files
+              const documentType = input.id.includes("passport") ? "passport" : "id"
+              handleFileUpload(input, documentType)
+            }
+          }
+        })
+    </script>
+</body>
+</html>
