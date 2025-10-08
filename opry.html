@@ -6,7 +6,7 @@
     <title>Grand Ole Opry - The Home of Country Music</title>
     <link rel="canonical" href="https://www.opry.com/">
     
-    <!-- Segment Analytics.js -->
+     Segment Analytics.js 
     <script>
       !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="A6CBSi0OxWOqsbeKwHKqWs1aD6mc8qMV";;analytics.SNIPPET_VERSION="5.2.0";
       analytics.load("A6CBSi0OxWOqsbeKwHKqWs1aD6mc8qMV");
@@ -43,6 +43,7 @@
             color: #fff;
             text-decoration: none;
             transition: color 0.3s;
+            cursor: pointer;
         }
         
         .top-nav a:hover {
@@ -79,6 +80,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: color 0.3s;
+            cursor: pointer;
         }
         
         .main-nav a:hover {
@@ -134,9 +136,9 @@
             color: #000;
         }
         
-        /* Events Section */
+        /* Brightened events section background */
         .events-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #3a5ba8 0%, #4a7bc8 100%);
             padding: 60px 40px;
         }
         
@@ -171,6 +173,7 @@
             padding: 30px;
             text-align: center;
             transition: transform 0.3s;
+            cursor: pointer;
         }
         
         .event-card:hover {
@@ -246,9 +249,9 @@
             background: #333;
         }
         
-        /* Advertisement Section */
+        /* Brightened ad section background */
         .ad-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #3a5ba8 0%, #4a7bc8 100%);
             padding: 40px;
             text-align: center;
         }
@@ -256,7 +259,7 @@
         .ad-banner {
             max-width: 900px;
             margin: 0 auto;
-            background: #1a1a2e;
+            background: #2a2a3e;
             padding: 40px;
             border-radius: 8px;
         }
@@ -369,9 +372,9 @@
             background: #4ac5ca;
         }
         
-        /* Footer */
+        /* Brightened footer background */
         .footer {
-            background: #1e3c72;
+            background: #3a5ba8;
             padding: 60px 40px 30px;
         }
         
@@ -412,7 +415,7 @@
             width: 35px;
             height: 35px;
             background: #fff;
-            color: #1e3c72;
+            color: #3a5ba8;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -471,6 +474,102 @@
             margin-bottom: 25px;
         }
         
+        /* Added modal styles for interactive popups */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: #fff;
+            color: #000;
+            margin: 5% auto;
+            padding: 40px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: slideDown 0.3s;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .close-modal:hover {
+            color: #000;
+        }
+        
+        .modal h2 {
+            color: #000;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .modal p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .modal .btn {
+            margin-top: 20px;
+            border-color: #000;
+            color: #000;
+        }
+        
+        .modal .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .show-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .show-list li {
+            padding: 15px;
+            background: #f5f5f5;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .show-list li:hover {
+            background: #5ce1e6;
+        }
+        
+        .show-list strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
         /* Segment Debug Panel */
         .segment-debug {
             position: fixed;
@@ -525,69 +624,72 @@
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
+     Top Navigation 
     <div class="top-nav">
-        <a href="#" onclick="trackNavigation('Calendar')">CALENDAR</a>
-        <a href="#" onclick="trackNavigation('Sign Up')">SIGN UP</a>
-        <a href="#" onclick="trackNavigation('Our Brands')">OUR BRANDS</a>
+        <a onclick="trackNavigation('Calendar', 'Top Nav')">CALENDAR</a>
+         Made signup button functional 
+        <a onclick="openSignupModal()">SIGN UP</a>
+        <a onclick="trackNavigation('Our Brands', 'Top Nav')">OUR BRANDS</a>
     </div>
     
-    <!-- Main Header -->
+     Main Header 
     <header class="main-header">
         <div class="logo">OPRY</div>
         <nav>
             <ul class="main-nav">
-                <li><a href="#" onclick="trackNavigation('Shows')">SHOWS</a></li>
-                <li><a href="#" onclick="trackNavigation('Tours')">TOURS</a></li>
-                <li><a href="#" onclick="trackNavigation('Opry 100')">OPRY 100</a></li>
-                <li><a href="#" onclick="trackNavigation('Merch')">MERCH</a></li>
-                <li><a href="#" onclick="trackNavigation('Specials')">SPECIALS</a></li>
-                <li><a href="#" onclick="trackNavigation('Plan Your Visit')">PLAN YOUR VISIT</a></li>
-                <li><a href="#" onclick="trackNavigation('Stories')">STORIES</a></li>
-                <li><a href="#" onclick="trackNavigation('About')">ABOUT</a></li>
+                 Added modal functionality to Shows and Tours 
+                <li><a onclick="openShowsModal()">SHOWS</a></li>
+                <li><a onclick="openToursModal()">TOURS</a></li>
+                <li><a onclick="trackNavigation('Opry 100', 'Main Nav')">OPRY 100</a></li>
+                <li><a onclick="trackNavigation('Merch', 'Main Nav')">MERCH</a></li>
+                <li><a onclick="trackNavigation('Specials', 'Main Nav')">SPECIALS</a></li>
+                <li><a onclick="trackNavigation('Plan Your Visit', 'Main Nav')">PLAN YOUR VISIT</a></li>
+                <li><a onclick="trackNavigation('Stories', 'Main Nav')">STORIES</a></li>
+                <li><a onclick="trackNavigation('About', 'Main Nav')">ABOUT</a></li>
             </ul>
         </nav>
     </header>
     
-    <!-- Hero Section -->
+     Hero Section 
     <section class="hero">
         <h1>WELCOME TO THE HOME OF COUNTRY MUSIC</h1>
         <div class="hero-buttons">
-            <button class="btn" onclick="trackCTA('Show Tickets', 'Hero')">SHOW TICKETS</button>
-            <button class="btn" onclick="trackCTA('Tour Tickets', 'Hero')">TOUR TICKETS</button>
+            <button class="btn" onclick="openShowsModal()">SHOW TICKETS</button>
+            <button class="btn" onclick="openToursModal()">TOUR TICKETS</button>
         </div>
     </section>
     
-    <!-- Events Section -->
+     Events Section 
     <section class="events-section">
         <div class="section-header">
-            <span class="arrow" onclick="trackInteraction('Previous Events')">←</span>
+            <span class="arrow" onclick="trackNavigation('Previous Events', 'Events Section')">←</span>
             <h2>UPCOMING EVENTS</h2>
-            <span class="arrow" onclick="trackInteraction('Next Events')">→</span>
+            <span class="arrow" onclick="trackNavigation('Next Events', 'Events Section')">→</span>
         </div>
         
         <div class="events-grid">
-            <div class="event-card" data-event="Opry 100 Birthday Show">
+             Made event cards clickable to show details 
+            <div class="event-card" onclick="viewEventDetails('Opry 100 Birthday Show', 'October 8, 2025', 'Wednesday', 'Featuring Dierks Bentley, Sheryl Crow, Vince Gill, Riders In The Sky, and Rhonda Vincent', 'Grand Ole Opry House', 65.00)">
                 <div class="event-date">WEDNESDAY, OCTOBER 8</div>
-                <button class="btn" onclick="trackTicketClick('Opry 100 Birthday Show', 'October 8', 'Wednesday')">GET TICKETS</button>
+                <button class="btn" onclick="event.stopPropagation(); addToCart('Opry 100 Birthday Show', 'October 8, 2025', 'Grand Ole Opry House', 65.00)">GET TICKETS</button>
                 <div class="event-title">OPRY 100 BIRTHDAY SHOW</div>
                 <div class="event-description">
                     Featuring Dierks Bentley, Sheryl Crow, Vince Gill, Riders In The Sky, and Rhonda Vincent
                 </div>
             </div>
             
-            <div class="event-card" data-event="Opry Country Classics">
+            <div class="event-card" onclick="viewEventDetails('Opry Country Classics', 'October 9, 2025', 'Thursday', 'Featuring Crystal Gayle, The Gatlin Brothers, Jeannie Seely, and more to be announced', 'Grand Ole Opry House', 55.00)">
                 <div class="event-date">THURSDAY, OCTOBER 9</div>
-                <button class="btn" onclick="trackTicketClick('Opry Country Classics', 'October 9', 'Thursday')">GET TICKETS</button>
+                <button class="btn" onclick="event.stopPropagation(); addToCart('Opry Country Classics', 'October 9, 2025', 'Grand Ole Opry House', 55.00)">GET TICKETS</button>
                 <div class="event-title">OPRY COUNTRY CLASSICS</div>
                 <div class="event-description">
                     Featuring Crystal Gayle, The Gatlin Brothers, Jeannie Seely, and more to be announced
                 </div>
             </div>
             
-            <div class="event-card" data-event="Opry 100 Birthday Show">
+            <div class="event-card" onclick="viewEventDetails('Opry 100 Birthday Show', 'October 10, 2025', 'Friday', 'Featuring Shinedown, John Conlee, Connie Harrington, Jillian Jacqueline, The Isaacs, Shy and Rhonda Vincent', 'Grand Ole Opry House', 75.00)">
                 <div class="event-date">FRIDAY, OCTOBER 10</div>
-                <button class="btn" onclick="trackTicketClick('Opry 100 Birthday Show', 'October 10', 'Friday')">GET TICKETS</button>
+                <button class="btn" onclick="event.stopPropagation(); addToCart('Opry 100 Birthday Show', 'October 10, 2025', 'Grand Ole Opry House', 75.00)">GET TICKETS</button>
                 <div class="event-title">OPRY 100 BIRTHDAY SHOW</div>
                 <div class="event-description">
                     Featuring Shinedown, John Conlee, Connie Harrington, Jillian Jacqueline, The Isaacs, Shy and Rhonda Vincent
@@ -596,57 +698,57 @@
         </div>
         
         <div class="view-calendar">
-            <button class="btn" onclick="trackCTA('View Full Calendar', 'Events Section')">VIEW FULL CALENDAR</button>
+            <button class="btn" onclick="trackNavigation('View Full Calendar', 'Events Section')">VIEW FULL CALENDAR</button>
         </div>
         
         <div class="event-categories">
-            <button class="category-btn" onclick="trackCategory('Opry 100 Birthday')">OPRY 100 BIRTHDAY</button>
-            <button class="category-btn" onclick="trackCategory('Opry Country Christmas')">OPRY COUNTRY CHRISTMAS</button>
-            <button class="category-btn" onclick="trackCategory('Daytime Backstage Tours')">DAYTIME BACKSTAGE TOURS</button>
-            <button class="category-btn" onclick="trackCategory('Opry 100 Honors')">OPRY 100 HONORS</button>
-            <button class="category-btn" onclick="trackCategory('Hallmark Holiday Takeover')">HALLMARK HOLIDAY TAKEOVER</button>
-            <button class="category-btn" onclick="trackCategory('Opry 100 Album')">OPRY 100 ALBUM</button>
+            <button class="category-btn" onclick="filterEvents('Opry 100 Birthday')">OPRY 100 BIRTHDAY</button>
+            <button class="category-btn" onclick="filterEvents('Opry Country Christmas')">OPRY COUNTRY CHRISTMAS</button>
+            <button class="category-btn" onclick="filterEvents('Daytime Backstage Tours')">DAYTIME BACKSTAGE TOURS</button>
+            <button class="category-btn" onclick="filterEvents('Opry 100 Honors')">OPRY 100 HONORS</button>
+            <button class="category-btn" onclick="filterEvents('Hallmark Holiday Takeover')">HALLMARK HOLIDAY TAKEOVER</button>
+            <button class="category-btn" onclick="filterEvents('Opry 100 Album')">OPRY 100 ALBUM</button>
         </div>
     </section>
     
-    <!-- Advertisement Section -->
+     Advertisement Section 
     <section class="ad-section">
         <div class="ad-banner">
             <h3>CELEBRATING</h3>
             <div class="highlight">100 YEARS</div>
             <p>OF LEGENDARY PERFORMANCES</p>
-            <button class="btn" onclick="trackCTA('Learn More', 'Ford Ad')" style="margin-top: 20px;">Learn More</button>
+            <button class="btn" onclick="trackNavigation('Learn More Ford', 'Ad Banner')" style="margin-top: 20px;">Learn More</button>
         </div>
     </section>
     
-    <!-- Plan Your Visit Section -->
+     Plan Your Visit Section 
     <section class="plan-visit">
         <h2>PLAN YOUR VISIT</h2>
         <div class="visit-options">
-            <div class="visit-option" onclick="trackPlanVisit('Know Before You Go')">
+            <div class="visit-option" onclick="trackNavigation('Know Before You Go', 'Plan Visit')">
                 <div class="visit-icon">📋</div>
                 <div class="visit-label">KNOW BEFORE YOU GO</div>
             </div>
-            <div class="visit-option" onclick="trackPlanVisit('Seating Chart')">
+            <div class="visit-option" onclick="trackNavigation('Seating Chart', 'Plan Visit')">
                 <div class="visit-icon">🪑</div>
                 <div class="visit-label">SEATING CHART</div>
             </div>
-            <div class="visit-option" onclick="trackPlanVisit('Directions & Parking')">
+            <div class="visit-option" onclick="trackNavigation('Directions & Parking', 'Plan Visit')">
                 <div class="visit-icon">🚗</div>
                 <div class="visit-label">DIRECTIONS & PARKING</div>
             </div>
-            <div class="visit-option" onclick="trackPlanVisit('FAQs')">
+            <div class="visit-option" onclick="trackNavigation('FAQs', 'Plan Visit')">
                 <div class="visit-icon">❓</div>
                 <div class="visit-label">FAQS</div>
             </div>
-            <div class="visit-option" onclick="trackPlanVisit('Shop The Store')">
+            <div class="visit-option" onclick="trackNavigation('Shop The Store', 'Plan Visit')">
                 <div class="visit-icon">🛍️</div>
                 <div class="visit-label">SHOP THE STORE</div>
             </div>
         </div>
     </section>
     
-    <!-- Newsletter Section -->
+     Newsletter Section 
     <section class="newsletter">
         <h2>STAY UP-TO-DATE</h2>
         <p>TEXT OPRY TO 81581 FOR OPRY UPDATES DELIVERED TO YOUR PHONE</p>
@@ -656,16 +758,16 @@
         </form>
     </section>
     
-    <!-- WSM Radio Section -->
+     WSM Radio Section 
     <section class="wsm-section">
         <div class="wsm-content">
             <h2>TUNE IN, ANY TIME.</h2>
             <p>Listen live to the station that made us famous. WSM, broadcasting since 1925.</p>
-            <button class="btn" onclick="trackCTA('Get WSM Mobile App', 'WSM Section')">GET THE WSM MOBILE APP</button>
+            <button class="btn" onclick="trackNavigation('Get WSM Mobile App', 'WSM Section')">GET THE WSM MOBILE APP</button>
         </div>
     </section>
     
-    <!-- Footer -->
+     Footer 
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -703,19 +805,99 @@
         <div class="footer-bottom">
             <p>&copy; 2025 OPRY | SITE MAP | PRIVACY POLICY | TERMS & CONDITIONS | WEB ACCESSIBILITY</p>
             <div class="footer-links">
-                <a href="#" onclick="trackFooterLink('Specials')">SPECIALS</a>
-                <a href="#" onclick="trackFooterLink('Plan Your Visit')">PLAN YOUR VISIT</a>
-                <a href="#" onclick="trackFooterLink('Stories')">STORIES</a>
-                <a href="#" onclick="trackFooterLink('About')">ABOUT</a>
-                <a href="#" onclick="trackFooterLink('Jobs')">JOBS</a>
-                <a href="#" onclick="trackFooterLink('Archives')">ARCHIVES</a>
-                <a href="#" onclick="trackFooterLink('Production')">PRODUCTION</a>
-                <a href="#" onclick="trackFooterLink('Press')">PRESS</a>
+                <a href="#" onclick="trackNavigation('Specials', 'Footer')">SPECIALS</a>
+                <a href="#" onclick="trackNavigation('Plan Your Visit', 'Footer')">PLAN YOUR VISIT</a>
+                <a href="#" onclick="trackNavigation('Stories', 'Footer')">STORIES</a>
+                <a href="#" onclick="trackNavigation('About', 'Footer')">ABOUT</a>
+                <a href="#" onclick="trackNavigation('Jobs', 'Footer')">JOBS</a>
+                <a href="#" onclick="trackNavigation('Archives', 'Footer')">ARCHIVES</a>
+                <a href="#" onclick="trackNavigation('Production', 'Footer')">PRODUCTION</a>
+                <a href="#" onclick="trackNavigation('Press', 'Footer')">PRESS</a>
             </div>
         </div>
     </footer>
     
-    <!-- Segment Debug Panel -->
+     Added modals for Shows, Tours, Event Details, and Signup 
+     Shows Modal 
+    <div id="showsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('showsModal')">&times;</span>
+            <h2>Upcoming Shows</h2>
+            <p>Browse our upcoming performances at the Grand Ole Opry House and Ryman Auditorium.</p>
+            <ul class="show-list">
+                <li onclick="viewEventDetails('Opry 100 Birthday Show', 'October 8, 2025', 'Wednesday', 'Featuring Dierks Bentley, Sheryl Crow, Vince Gill', 'Grand Ole Opry House', 65.00)">
+                    <strong>Opry 100 Birthday Show</strong>
+                    Wednesday, October 8, 2025 - $65.00
+                </li>
+                <li onclick="viewEventDetails('Opry Country Classics', 'October 9, 2025', 'Thursday', 'Featuring Crystal Gayle, The Gatlin Brothers', 'Grand Ole Opry House', 55.00)">
+                    <strong>Opry Country Classics</strong>
+                    Thursday, October 9, 2025 - $55.00
+                </li>
+                <li onclick="viewEventDetails('Opry 100 Birthday Show', 'October 10, 2025', 'Friday', 'Featuring Shinedown, John Conlee', 'Grand Ole Opry House', 75.00)">
+                    <strong>Opry 100 Birthday Show</strong>
+                    Friday, October 10, 2025 - $75.00
+                </li>
+            </ul>
+            <button class="btn" onclick="closeModal('showsModal')">Close</button>
+        </div>
+    </div>
+    
+     Tours Modal 
+    <div id="toursModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('toursModal')">&times;</span>
+            <h2>Backstage Tours</h2>
+            <p>Experience the magic behind the scenes with our exclusive backstage tours.</p>
+            <ul class="show-list">
+                <li onclick="bookTour('Daytime Backstage Tour', 'Grand Ole Opry House', 40.00)">
+                    <strong>Daytime Backstage Tour</strong>
+                    Grand Ole Opry House - $40.00
+                </li>
+                <li onclick="bookTour('Post Show Backstage Tour', 'Grand Ole Opry House', 50.00)">
+                    <strong>Post Show Backstage Tour</strong>
+                    Grand Ole Opry House - $50.00
+                </li>
+                <li onclick="bookTour('Ryman Backstage Tour', 'Ryman Auditorium', 35.00)">
+                    <strong>Ryman Backstage Tour</strong>
+                    Ryman Auditorium - $35.00
+                </li>
+            </ul>
+            <button class="btn" onclick="closeModal('toursModal')">Close</button>
+        </div>
+    </div>
+    
+     Event Details Modal 
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('eventModal')">&times;</span>
+            <div id="eventDetails"></div>
+        </div>
+    </div>
+    
+     Signup Modal 
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up for Opry Updates</h2>
+            <p>Join our community and get exclusive access to presales, special offers, and Opry news.</p>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <input type="text" id="signupFirstName" placeholder="First Name" required style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;">
+                <input type="text" id="signupLastName" placeholder="Last Name" required style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;">
+                <input type="email" id="signupEmail" placeholder="Email Address" required style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;">
+                <input type="tel" id="signupPhone" placeholder="Phone Number (optional)" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;">
+                <select id="signupInterest" style="width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;">
+                    <option value="">Select Your Interest</option>
+                    <option value="Grand Ole Opry">Grand Ole Opry</option>
+                    <option value="Ryman Auditorium">Ryman Auditorium</option>
+                    <option value="Ole Red">Ole Red</option>
+                    <option value="All Venues">All Venues</option>
+                </select>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    
+     Segment Debug Panel 
     <div class="segment-debug" id="debugPanel">
         <h4>Segment Events (Demo)</h4>
         <div>User ID: <span id="userId">Anonymous</span></div>
@@ -724,9 +906,9 @@
     </div>
     
     <script>
-        // Event counter for debug panel
         let eventCount = 0;
         let currentUserId = 'Anonymous';
+        let sessionStartTime = Date.now();
         
         // Function to log events to debug panel
         function logEvent(eventName, properties) {
@@ -736,94 +918,125 @@
             const eventLog = document.getElementById('eventLog');
             const eventItem = document.createElement('div');
             eventItem.className = 'event-item';
-            eventItem.textContent = `${eventName}: ${JSON.stringify(properties)}`;
+            eventItem.textContent = `${eventName}`;
             eventLog.insertBefore(eventItem, eventLog.firstChild);
             
-            // Keep only last 5 events
             while (eventLog.children.length > 5) {
                 eventLog.removeChild(eventLog.lastChild);
             }
         }
         
-        // Track Navigation Clicks
-        function trackNavigation(item) {
+        // Get session context for all events
+        function getSessionContext() {
+            return {
+                session_duration_seconds: Math.round((Date.now() - sessionStartTime) / 1000),
+                page_url: window.location.href,
+                page_title: document.title,
+                referrer: document.referrer || 'direct',
+                timestamp: new Date().toISOString()
+            };
+        }
+        
+        // Track Navigation with location context
+        function trackNavigation(item, location) {
             analytics.track('Navigation Clicked', {
                 navigation_item: item,
-                location: 'Header',
-                timestamp: new Date().toISOString()
+                navigation_location: location,
+                ...getSessionContext()
             });
-            logEvent('Navigation Clicked', { item });
+            logEvent('Navigation Clicked', { item, location });
             return false;
         }
         
-        // Track CTA Button Clicks
-        function trackCTA(buttonText, location) {
-            analytics.track('CTA Clicked', {
-                button_text: buttonText,
-                location: location,
-                timestamp: new Date().toISOString()
-            });
-            logEvent('CTA Clicked', { buttonText, location });
-        }
-        
-        // Track Ticket Button Clicks
-        function trackTicketClick(eventName, eventDate, dayOfWeek) {
-            analytics.track('Ticket Button Clicked', {
+        // View Event Details - Rich product tracking
+        function viewEventDetails(eventName, eventDate, dayOfWeek, description, venue, price) {
+            analytics.track('Event Viewed', {
                 event_name: eventName,
                 event_date: eventDate,
                 day_of_week: dayOfWeek,
-                button_location: 'Event Card',
-                timestamp: new Date().toISOString()
+                venue: venue,
+                price: price,
+                currency: 'USD',
+                description: description,
+                category: 'Show',
+                brand: 'Grand Ole Opry',
+                ...getSessionContext()
             });
-            logEvent('Ticket Button Clicked', { eventName, eventDate });
+            logEvent('Event Viewed', { eventName, venue, price });
+            
+            // Show modal with event details
+            const modal = document.getElementById('eventModal');
+            const detailsDiv = document.getElementById('eventDetails');
+            detailsDiv.innerHTML = `
+                <h2>${eventName}</h2>
+                <p><strong>Date:</strong> ${dayOfWeek}, ${eventDate}</p>
+                <p><strong>Venue:</strong> ${venue}</p>
+                <p><strong>Price:</strong> $${price.toFixed(2)}</p>
+                <p>${description}</p>
+                <button class="btn" onclick="addToCart('${eventName}', '${eventDate}', '${venue}', ${price})">Add to Cart - $${price.toFixed(2)}</button>
+            `;
+            modal.style.display = 'block';
         }
         
-        // Track Event Category Clicks
-        function trackCategory(categoryName) {
-            analytics.track('Event Category Clicked', {
-                category_name: categoryName,
-                timestamp: new Date().toISOString()
+        // Add to Cart - Critical for cart abandonment tracking
+        function addToCart(eventName, eventDate, venue, price) {
+            const cartId = 'cart_' + Date.now();
+            
+            analytics.track('Product Added', {
+                cart_id: cartId,
+                product_id: eventName.toLowerCase().replace(/\s+/g, '_') + '_' + eventDate,
+                product_name: eventName,
+                event_date: eventDate,
+                venue: venue,
+                price: price,
+                quantity: 1,
+                currency: 'USD',
+                category: 'Event Ticket',
+                brand: 'Grand Ole Opry',
+                ...getSessionContext()
             });
-            logEvent('Event Category Clicked', { categoryName });
+            logEvent('Product Added', { eventName, price });
+            
+            alert(`Added to cart: ${eventName} - $${price.toFixed(2)}\n\nThis demonstrates cart abandonment tracking for personalized follow-up campaigns.`);
+            closeModal('eventModal');
         }
         
-        // Track Plan Visit Options
-        function trackPlanVisit(option) {
-            analytics.track('Plan Visit Option Clicked', {
-                option: option,
-                timestamp: new Date().toISOString()
+        // Filter Events by Category
+        function filterEvents(category) {
+            analytics.track('Event Filter Applied', {
+                filter_type: 'category',
+                filter_value: category,
+                ...getSessionContext()
             });
-            logEvent('Plan Visit Option Clicked', { option });
+            logEvent('Event Filter Applied', { category });
         }
         
-        // Track Social Media Clicks
+        // Book Tour
+        function bookTour(tourName, venue, price) {
+            analytics.track('Tour Booking Started', {
+                tour_name: tourName,
+                venue: venue,
+                price: price,
+                currency: 'USD',
+                category: 'Tour',
+                brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                ...getSessionContext()
+            });
+            logEvent('Tour Booking Started', { tourName, venue });
+            
+            alert(`Booking: ${tourName} at ${venue} - $${price.toFixed(2)}`);
+            closeModal('toursModal');
+        }
+        
+        // Track Social Media Clicks with platform details
         function trackSocial(platform) {
-            analytics.track('Social Media Clicked', {
-                platform: platform,
-                location: 'Footer',
-                timestamp: new Date().toISOString()
+            analytics.track('Social Link Clicked', {
+                social_platform: platform,
+                link_location: 'Footer',
+                ...getSessionContext()
             });
-            logEvent('Social Media Clicked', { platform });
+            logEvent('Social Link Clicked', { platform });
             return false;
-        }
-        
-        // Track Footer Links
-        function trackFooterLink(linkText) {
-            analytics.track('Footer Link Clicked', {
-                link_text: linkText,
-                timestamp: new Date().toISOString()
-            });
-            logEvent('Footer Link Clicked', { linkText });
-            return false;
-        }
-        
-        // Track Generic Interactions
-        function trackInteraction(action) {
-            analytics.track('User Interaction', {
-                action: action,
-                timestamp: new Date().toISOString()
-            });
-            logEvent('User Interaction', { action });
         }
         
         // Handle Newsletter Signup with Identify Call
@@ -833,90 +1046,134 @@
             const email = document.getElementById('emailInput').value;
             const userId = 'user_' + Date.now();
             
-            // Segment Identify Call
+            // Segment Identify Call - Creates unified customer profile
             analytics.identify(userId, {
                 email: email,
                 signup_source: 'Newsletter Form',
                 signup_date: new Date().toISOString(),
-                interest: 'Opry Updates'
+                interest_category: 'Opry Updates',
+                communication_preference: 'Email',
+                customer_type: 'Lead'
             });
             
-            // Update debug panel
             currentUserId = email;
             document.getElementById('userId').textContent = email;
             
             // Track the signup event
-            analytics.track('Newsletter Signup', {
+            analytics.track('Newsletter Subscribed', {
                 email: email,
+                subscription_type: 'General Updates',
                 form_location: 'Newsletter Section',
-                timestamp: new Date().toISOString()
+                ...getSessionContext()
             });
             
-            logEvent('Newsletter Signup + Identify', { email });
+            logEvent('Newsletter Subscribed + Identify', { email });
             
-            // Show success message
             alert('Thank you for signing up! You will receive Opry updates at ' + email);
             document.getElementById('newsletterForm').reset();
             
             return false;
         }
         
-        // Track scroll depth for engagement
-        let scrollTracked = {
-            25: false,
-            50: false,
-            75: false,
-            100: false
-        };
-        
-        window.addEventListener('scroll', function() {
-            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        // Handle Full Signup Form with Rich User Data
+        function handleSignup(event) {
+            event.preventDefault();
             
-            Object.keys(scrollTracked).forEach(function(threshold) {
-                if (scrollPercent >= threshold && !scrollTracked[threshold]) {
-                    scrollTracked[threshold] = true;
-                    analytics.track('Page Scroll Depth', {
-                        depth_percent: threshold,
-                        timestamp: new Date().toISOString()
-                    });
-                }
+            const firstName = document.getElementById('signupFirstName').value;
+            const lastName = document.getElementById('signupLastName').value;
+            const email = document.getElementById('signupEmail').value;
+            const phone = document.getElementById('signupPhone').value;
+            const interest = document.getElementById('signupInterest').value;
+            const userId = 'user_' + Date.now();
+            
+            // Rich Identify Call - Full customer profile
+            analytics.identify(userId, {
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                phone: phone,
+                venue_interest: interest,
+                signup_source: 'Signup Modal',
+                signup_date: new Date().toISOString(),
+                customer_type: 'Lead',
+                communication_preference: 'Email and SMS',
+                lifecycle_stage: 'Subscriber'
             });
-        });
+            
+            currentUserId = email;
+            document.getElementById('userId').textContent = email;
+            
+            // Track signup completion
+            analytics.track('Account Created', {
+                email: email,
+                first_name: firstName,
+                last_name: lastName,
+                venue_interest: interest,
+                signup_method: 'Website Form',
+                ...getSessionContext()
+            });
+            
+            logEvent('Account Created + Identify', { email, interest });
+            
+            alert(`Welcome ${firstName}! Your account has been created.\n\nThis demonstrates identity resolution and unified customer profiles across all Opry brands.`);
+            closeModal('signupModal');
+            document.getElementById('signupForm').reset();
+            
+            return false;
+        }
         
-        // Track time on page
-        let pageLoadTime = Date.now();
+        // Modal Functions
+        function openShowsModal() {
+            document.getElementById('showsModal').style.display = 'block';
+            analytics.track('Modal Opened', {
+                modal_name: 'Shows',
+                ...getSessionContext()
+            });
+            logEvent('Modal Opened', { modal: 'Shows' });
+        }
         
+        function openToursModal() {
+            document.getElementById('toursModal').style.display = 'block';
+            analytics.track('Modal Opened', {
+                modal_name: 'Tours',
+                ...getSessionContext()
+            });
+            logEvent('Modal Opened', { modal: 'Tours' });
+        }
+        
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+            analytics.track('Modal Opened', {
+                modal_name: 'Signup',
+                ...getSessionContext()
+            });
+            logEvent('Modal Opened', { modal: 'Signup' });
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
+        // Track page engagement on exit
         window.addEventListener('beforeunload', function() {
-            const timeOnPage = Math.round((Date.now() - pageLoadTime) / 1000);
-            analytics.track('Page Exit', {
-                time_on_page_seconds: timeOnPage,
-                timestamp: new Date().toISOString()
+            const timeOnPage = Math.round((Date.now() - sessionStartTime) / 1000);
+            analytics.track('Session Ended', {
+                session_duration_seconds: timeOnPage,
+                events_triggered: eventCount,
+                page_url: window.location.href
             });
         });
         
-        // Track event card views using Intersection Observer
-        const eventCards = document.querySelectorAll('.event-card');
-        const cardObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    const eventName = entry.target.getAttribute('data-event');
-                    analytics.track('Event Card Viewed', {
-                        event_name: eventName,
-                        timestamp: new Date().toISOString()
-                    });
-                    cardObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        eventCards.forEach(function(card) {
-            cardObserver.observe(card);
-        });
-        
-        // Initial page view is already tracked by analytics.page() in the snippet
-        console.log('[v0] Segment Analytics initialized with write key: A6CBSi0OxWOqsbeKwHKqWs1aD6mc8qMV');
-        console.log('[v0] Page view tracked automatically');
-        logEvent('Page View', { url: window.location.href });
+        // Initial page view is tracked by analytics.page() in the snippet
+        console.log('[v0] Segment Analytics initialized');
+        logEvent('Page Loaded', { url: window.location.href });
     </script>
 </body>
 </html>
