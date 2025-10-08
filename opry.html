@@ -6,7 +6,7 @@
     <title>Grand Ole Opry - The Home of Country Music</title>
     <link rel="canonical" href="https://www.opry.com/">
     
-     Segment Analytics.js 
+    <!-- Segment Analytics.js -->
     <script>
       !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="A6CBSi0OxWOqsbeKwHKqWs1aD6mc8qMV";;analytics.SNIPPET_VERSION="5.2.0";
       analytics.load("A6CBSi0OxWOqsbeKwHKqWs1aD6mc8qMV");
@@ -685,6 +685,121 @@
             font-family: 'Courier New', monospace;
             font-size: 11px;
         }
+
+        /* Added Opry 100 features section styling */
+        .opry100-section {
+            background: #000;
+            padding: 70px 50px;
+        }
+        
+        .opry100-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .opry100-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .opry100-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .opry100-card.blue-bg {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+        
+        .opry100-card.dark-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .opry100-card.cyan-bg {
+            background: #5ce1e6;
+            color: #000;
+        }
+        
+        .opry100-card h3 {
+            font-size: 42px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .opry100-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .opry100-card .btn {
+            align-self: flex-start;
+        }
+        
+        .opry100-card.cyan-bg .btn {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .opry100-card.cyan-bg .btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        
+        .featured-artists {
+            background: #000;
+            padding: 70px 50px;
+        }
+        
+        .featured-artists h2 {
+            text-align: center;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+            font-weight: 900;
+        }
+        
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .artist-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            aspect-ratio: 1;
+        }
+        
+        .artist-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .artist-card:hover img {
+            transform: scale(1.1);
+        }
         
         @media (max-width: 1200px) {
             .events-grid {
@@ -697,6 +812,15 @@
             
             .visit-options {
                 grid-template-columns: repeat(3, 1fr);
+            }
+
+            /* Responsive for Opry 100 features */
+            .opry100-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .artists-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -724,18 +848,23 @@
             .segment-debug {
                 display: none;
             }
+
+            /* Responsive for Featured Artists */
+            .artists-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-     Top Navigation 
+    <!-- Top Navigation -->
     <div class="top-nav">
         <a onclick="trackNavigation('Calendar', 'Top Nav')">CALENDAR</a>
         <a onclick="openSignupModal()">SIGN UP</a>
         <a onclick="trackNavigation('Our Brands', 'Top Nav')">OUR BRANDS</a>
     </div>
     
-     Main Header 
+    <!-- Main Header -->
     <header class="main-header">
         <div class="logo">OPRY</div>
         <nav>
@@ -752,7 +881,7 @@
         </nav>
     </header>
     
-     Hero Section 
+    <!-- Hero Section -->
     <section class="hero">
         <h1>WELCOME TO THE HOME OF COUNTRY MUSIC</h1>
         <div class="hero-buttons">
@@ -761,7 +890,7 @@
         </div>
     </section>
     
-     Events Section 
+    <!-- Events Section -->
     <section class="events-section">
         <div class="section-header">
             <span class="arrow" onclick="trackNavigation('Previous Events', 'Events Section')">←</span>
@@ -812,7 +941,7 @@
         </div>
     </section>
     
-     Advertisement Section 
+    <!-- Advertisement Section -->
     <section class="ad-section">
         <div class="ad-banner">
             <h3>CELEBRATING</h3>
@@ -822,7 +951,7 @@
         </div>
     </section>
     
-     Plan Your Visit Section 
+    <!-- Plan Your Visit Section -->
     <section class="plan-visit">
         <h2>PLAN YOUR VISIT</h2>
         <div class="visit-options">
@@ -849,7 +978,7 @@
         </div>
     </section>
     
-     Newsletter Section 
+    <!-- Newsletter Section -->
     <section class="newsletter">
         <h2>STAY UP-TO-DATE</h2>
         <p>TEXT OPRY TO 81581 FOR OPRY UPDATES DELIVERED TO YOUR PHONE</p>
@@ -859,7 +988,7 @@
         </form>
     </section>
     
-     WSM Radio Section 
+    <!-- WSM Radio Section -->
     <section class="wsm-section">
         <div class="wsm-content">
             <h2>TUNE IN, ANY TIME.</h2>
@@ -867,8 +996,53 @@
             <button class="btn" onclick="trackNavigation('Get WSM Mobile App', 'WSM Section')">GET THE WSM MOBILE APP</button>
         </div>
     </section>
+
+    <!-- Added Opry 100 Features Section after events section -->
+    <section class="opry100-section">
+        <div class="opry100-grid">
+            <div class="opry100-card blue-bg" onclick="trackOpry100Feature('Opry 100 Birthday')">
+                <h3>OPRY 100<br>BIRTHDAY</h3>
+                <p>Celebrate our 100th "Rhinestone Milestone Birthday" all October with four weeks of birthday shows, plaza parties, special fan activations, and more. If you've ever experienced the Opry this year, now is the time. Because you only turn 100 once, and we're doing it the Opry way.</p>
+                <button class="btn">GET TICKETS</button>
+            </div>
+            
+            <div class="opry100-card dark-bg" onclick="trackOpry100Feature('Rhinestone Milestone')">
+                <h3>OPRY 100<br>RHINESTONE<br>MILESTONE</h3>
+                <p style="font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;">A BIRTHDAY MONTH CELEBRATION</p>
+                <p style="font-size: 12px; margin-top: 20px;">SPONSORED BY<br><strong style="font-size: 18px;">COUNTRY INN & SUITES • DURANGO BOOTS</strong></p>
+            </div>
+            
+            <div class="opry100-card cyan-bg" onclick="trackOpry100Feature('Opry 100 Album')">
+                <h3>OPRY 100 ALBUM</h3>
+                <p>Opry 100: Country's Greatest Songs is a one-of-a-kind album featuring never-before-released performances—LIVE from the iconic Opry stage. Stream or download the album today and claim your piece of country music history.</p>
+                <button class="btn">PREORDER NOW</button>
+            </div>
+            
+            <div class="opry100-card blue-bg" onclick="trackOpry100Feature('Blake Shelton Live Celebration')">
+                <h3>BLAKE SHELTON<br>HOSTS<br>OPRY 100:<br>A LIVE<br>CELEBRATION</h3>
+                <p style="font-size: 14px; margin-top: 20px;"><strong>MON 9/15</strong><br>NBC • peacock</p>
+                <button class="btn">LEARN MORE</button>
+            </div>
+        </div>
+    </section>
     
-     Footer 
+    <!-- Added Featured Artists Section -->
+    <section class="featured-artists">
+        <h2>FEATURED ARTISTS</h2>
+        <div class="artists-grid">
+            <div class="artist-card" onclick="trackArtistClick('Artist 1')">
+                <img src="https://www.opry.com/wp-content/uploads/2024/09/Artist-1-600x600.jpg" alt="Featured Artist">
+            </div>
+            <div class="artist-card" onclick="trackArtistClick('Artist 2')">
+                <img src="https://www.opry.com/wp-content/uploads/2024/09/Artist-2-600x600.jpg" alt="Featured Artist">
+            </div>
+            <div class="artist-card" onclick="trackArtistClick('Artist 3')">
+                <img src="https://www.opry.com/wp-content/uploads/2024/09/Artist-3-600x600.jpg" alt="Featured Artist">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
@@ -918,7 +1092,7 @@
         </div>
     </footer>
     
-     Shows Modal 
+    <!-- Shows Modal -->
     <div id="showsModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('showsModal')">&times;</span>
@@ -942,7 +1116,7 @@
         </div>
     </div>
     
-     Tours Modal 
+    <!-- Tours Modal -->
     <div id="toursModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('toursModal')">&times;</span>
@@ -966,7 +1140,7 @@
         </div>
     </div>
     
-     Event Details Modal 
+    <!-- Event Details Modal -->
     <div id="eventModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('eventModal')">&times;</span>
@@ -974,7 +1148,7 @@
         </div>
     </div>
     
-     Signup Modal 
+    <!-- Signup Modal -->
     <div id="signupModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('signupModal')">&times;</span>
@@ -997,7 +1171,7 @@
         </div>
     </div>
     
-     Segment Debug Panel 
+    <!-- Segment Debug Panel -->
     <div class="segment-debug" id="debugPanel">
         <h4>Segment Events (Demo)</h4>
         <div>User ID: <span id="userId">Anonymous</span></div>
@@ -1218,7 +1392,7 @@
             
             logEvent('Account Created + Identify', { email, interest });
             
-            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles with preferences\n• Unified view for personalization`);
+            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles for personalization\n• Unified view for cross-channel campaigns`);
             closeModal('signupModal');
             document.getElementById('signupForm').reset();
             
@@ -1264,6 +1438,13 @@
             }
         }
         
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+        
         // Track page engagement on exit
         window.addEventListener('beforeunload', function() {
             const timeOnPage = Math.round((Date.now() - sessionStartTime) / 1000);
@@ -1277,6 +1458,25 @@
         // Initial page view is tracked by analytics.page() in the snippet
         console.log('[v0] Segment Analytics initialized - Opry Demo');
         logEvent('Page Loaded', { url: window.location.href });
+
+        function trackOpry100Feature(featureName) {
+            analytics.track('Opry 100 Feature Clicked', {
+                feature_name: featureName,
+                section: 'Opry 100 Showcase',
+                ...getSessionContext()
+            });
+            logEvent('Opry 100 Feature Clicked', { featureName });
+            alert(`Viewing: ${featureName}\n\n[DEMO NOTE] Tracks engagement with special Opry 100 content for targeted campaigns.`);
+        }
+        
+        function trackArtistClick(artistName) {
+            analytics.track('Artist Profile Viewed', {
+                artist_name: artistName,
+                section: 'Featured Artists',
+                ...getSessionContext()
+            });
+            logEvent('Artist Profile Viewed', { artistName });
+        }
     </script>
 </body>
 </html>
