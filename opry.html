@@ -1184,6 +1184,17 @@
         let currentUserId = 'Anonymous';
         let sessionStartTime = Date.now();
         
+        function getDeviceType() {
+            const ua = navigator.userAgent;
+            if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+                return "tablet";
+            }
+            if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+                return "mobile";
+            }
+            return "desktop";
+        }
+        
         // Function to log events to debug panel
         function logEvent(eventName, properties) {
             eventCount++;
@@ -1201,13 +1212,17 @@
             }
         }
         
-        // Get session context for all events
         function getSessionContext() {
             return {
+                session_id: 'session_' + sessionStartTime,
                 session_duration_seconds: Math.round((Date.now() - sessionStartTime) / 1000),
                 page_url: window.location.href,
+                page_path: window.location.pathname,
                 page_title: document.title,
                 referrer: document.referrer || 'direct',
+                device_type: getDeviceType(),
+                screen_width: window.screen.width,
+                screen_height: window.screen.height,
                 timestamp: new Date().toISOString()
             };
         }
@@ -1223,21 +1238,28 @@
             return false;
         }
         
-        // View Event Details - Rich product tracking
         function viewEventDetails(eventName, eventDate, dayOfWeek, description, venue, price) {
-            analytics.track('Event Viewed', {
+            const productId = eventName.toLowerCase().replace(/\s+/g, '_') + '_' + eventDate.replace(/\s+/g, '_');
+            
+            analytics.track('Product Viewed', {
+                product_id: productId,
+                sku: productId,
+                name: eventName,
+                category: 'Event Ticket',
+                brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                variant: dayOfWeek,
+                price: price,
+                currency: 'USD',
+                url: window.location.href,
+                // Opry-specific properties
                 event_name: eventName,
                 event_date: eventDate,
                 day_of_week: dayOfWeek,
                 venue: venue,
-                price: price,
-                currency: 'USD',
                 description: description,
-                category: 'Show',
-                brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
                 ...getSessionContext()
             });
-            logEvent('Event Viewed', { eventName, venue, price });
+            logEvent('Product Viewed', { eventName, venue, price });
             
             // Show modal with event details
             const modal = document.getElementById('eventModal');
@@ -1249,65 +1271,115 @@
                 <p><strong>Price:</strong> $${price.toFixed(2)}</p>
                 <p>${description}</p>
                 <button class="btn" onclick="addToCart('${eventName}', '${eventDate}', '${venue}', ${price})">Add to Cart - $${price.toFixed(2)}</button>
+                <button class="btn" onclick="completeOrder('${eventName}', '${eventDate}', '${venue}', ${price})" style="margin-left: 10px; background: #5ce1e6; color: #000;">Complete Purchase</button>
             `;
             modal.style.display = 'block';
         }
         
-        // Add to Cart - Critical for cart abandonment tracking
         function addToCart(eventName, eventDate, venue, price) {
             const cartId = 'cart_' + Date.now();
+            const productId = eventName.toLowerCase().replace(/\s+/g, '_') + '_' + eventDate.replace(/\s+/g, '_');
             
             analytics.track('Product Added', {
                 cart_id: cartId,
-                product_id: eventName.toLowerCase().replace(/\s+/g, '_') + '_' + eventDate,
-                product_name: eventName,
-                event_date: eventDate,
-                venue: venue,
+                product_id: productId,
+                sku: productId,
+                name: eventName,
+                category: 'Event Ticket',
+                brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                variant: eventDate,
                 price: price,
                 quantity: 1,
                 currency: 'USD',
-                category: 'Event Ticket',
-                brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                position: 1,
+                url: window.location.href,
+                // Opry-specific properties
+                event_name: eventName,
+                event_date: eventDate,
+                venue: venue,
                 ...getSessionContext()
             });
             logEvent('Product Added', { eventName, price });
             
-            alert(`✓ Added to cart: ${eventName}\nDate: ${eventDate}\nVenue: ${venue}\nPrice: $${price.toFixed(2)}\n\n[DEMO NOTE] This "Product Added" event enables cart abandonment campaigns and personalized follow-ups.`);
+            alert(`✓ Added to cart: ${eventName}\nDate: ${eventDate}\nVenue: ${venue}\nPrice: $${price.toFixed(2)}\n\n[DEMO NOTE] This "Product Added" event enables:\n• Real-time cart abandonment campaigns\n• Cross-sell recommendations\n• Revenue attribution across 16 brands`);
+            closeModal('eventModal');
+        }
+        
+        function completeOrder(eventName, eventDate, venue, price) {
+            const orderId = 'order_' + Date.now();
+            const productId = eventName.toLowerCase().replace(/\s+/g, '_') + '_' + eventDate.replace(/\s+/g, '_');
+            
+            analytics.track('Order Completed', {
+                order_id: orderId,
+                total: price,
+                revenue: price,
+                shipping: 0,
+                tax: price * 0.0925, // TN sales tax
+                currency: 'USD',
+                products: [{
+                    product_id: productId,
+                    sku: productId,
+                    name: eventName,
+                    price: price,
+                    quantity: 1,
+                    category: 'Event Ticket',
+                    brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                    variant: eventDate,
+                    url: window.location.href
+                }],
+                // Opry-specific properties
+                venue: venue,
+                event_date: eventDate,
+                customer_type: currentUserId === 'Anonymous' ? 'Guest' : 'Registered',
+                ...getSessionContext()
+            });
+            logEvent('Order Completed', { eventName, revenue: price });
+            
+            alert(`✓ Order Confirmed!\n\nOrder ID: ${orderId}\nEvent: ${eventName}\nTotal: $${price.toFixed(2)}\n\n[DEMO NOTE] This "Order Completed" event enables:\n• LTV calculation and tracking\n• Repeat purchase rate measurement (1.1 → 1.65 goal)\n• Revenue attribution by venue/brand\n• Customer segmentation by purchase behavior`);
             closeModal('eventModal');
         }
         
         // Filter Events by Category
         function filterEvents(category) {
-            analytics.track('Event Filter Applied', {
-                filter_type: 'category',
-                filter_value: category,
+            analytics.track('Products Searched', {
+                query: category,
+                search_type: 'category_filter',
+                category: category,
                 ...getSessionContext()
             });
-            logEvent('Event Filter Applied', { category });
-            alert(`Filtering events by: ${category}\n\n[DEMO NOTE] This tracks user preferences for personalized recommendations.`);
+            logEvent('Products Searched', { category });
+            alert(`Filtering events by: ${category}\n\n[DEMO NOTE] This tracks user preferences for:\n• Personalized event recommendations\n• Audience segmentation by interest\n• Content personalization`);
         }
         
-        // Book Tour
         function bookTour(tourName, venue, price) {
-            analytics.track('Tour Booking Started', {
-                tour_name: tourName,
-                venue: venue,
-                price: price,
-                currency: 'USD',
+            const productId = tourName.toLowerCase().replace(/\s+/g, '_');
+            
+            // Track as Product Added first
+            analytics.track('Product Added', {
+                cart_id: 'cart_' + Date.now(),
+                product_id: productId,
+                sku: productId,
+                name: tourName,
                 category: 'Tour',
                 brand: venue === 'Ryman Auditorium' ? 'Ryman' : 'Grand Ole Opry',
+                price: price,
+                quantity: 1,
+                currency: 'USD',
+                url: window.location.href,
+                venue: venue,
                 ...getSessionContext()
             });
-            logEvent('Tour Booking Started', { tourName, venue });
             
-            alert(`Booking: ${tourName}\nVenue: ${venue}\nPrice: $${price.toFixed(2)}\n\n[DEMO NOTE] High-value conversion event for revenue attribution.`);
+            logEvent('Product Added (Tour)', { tourName, venue });
+            
+            alert(`Booking: ${tourName}\nVenue: ${venue}\nPrice: $${price.toFixed(2)}\n\n[DEMO NOTE] Tour bookings are tracked as products for:\n• Cross-brand engagement tracking\n• Upsell opportunities (tour + show packages)\n• Revenue attribution`);
             closeModal('toursModal');
         }
         
         // Track Social Media Clicks with platform details
         function trackSocial(platform) {
             analytics.track('Social Link Clicked', {
-                social_platform: platform,
+                social_network: platform,
                 link_location: 'Footer',
                 ...getSessionContext()
             });
@@ -1315,44 +1387,52 @@
             return false;
         }
         
-        // Handle Newsletter Signup with Identify Call
         function handleNewsletterSignup(event) {
             event.preventDefault();
             
             const email = document.getElementById('emailInput').value;
-            const userId = 'user_' + Date.now();
+            const userId = 'user_' + email.replace(/[^a-zA-Z0-9]/g, '_');
             
             // Segment Identify Call - Creates unified customer profile
             analytics.identify(userId, {
                 email: email,
+                name: email.split('@')[0], // Extract name from email
+                created_at: new Date().toISOString(),
+                // Opry-specific traits
                 signup_source: 'Newsletter Form',
                 signup_date: new Date().toISOString(),
                 interest_category: 'Opry Updates',
                 communication_preference: 'Email',
                 customer_type: 'Lead',
-                lifecycle_stage: 'Subscriber'
+                lifecycle_stage: 'Subscriber',
+                marketing_opt_in: true,
+                // Business metrics
+                total_lifetime_value: 0,
+                total_orders: 0,
+                preferred_venue: 'Unknown',
+                favorite_artists: []
             });
             
             currentUserId = email;
             document.getElementById('userId').textContent = email;
             
             // Track the signup event
-            analytics.track('Newsletter Subscribed', {
+            analytics.track('Email Captured', {
                 email: email,
-                subscription_type: 'General Updates',
+                form_name: 'Newsletter Signup',
                 form_location: 'Newsletter Section',
+                subscription_type: 'General Updates',
                 ...getSessionContext()
             });
             
-            logEvent('Newsletter Subscribed + Identify', { email });
+            logEvent('Email Captured + Identify', { email });
             
-            alert(`✓ Thank you for signing up!\n\nEmail: ${email}\n\n[DEMO NOTE] This creates a unified customer profile in Segment with email as the identifier. Perfect for cross-channel personalization.`);
+            alert(`✓ Thank you for signing up!\n\nEmail: ${email}\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution using email as key identifier\n• Unified customer profile creation\n• Cross-channel activation (email, ads, website)\n• Foundation for personalization across 16 brands`);
             document.getElementById('newsletterForm').reset();
             
             return false;
         }
         
-        // Handle Full Signup Form with Rich User Data
         function handleSignup(event) {
             event.preventDefault();
             
@@ -1361,38 +1441,56 @@
             const email = document.getElementById('signupEmail').value;
             const phone = document.getElementById('signupPhone').value;
             const interest = document.getElementById('signupInterest').value;
-            const userId = 'user_' + Date.now();
+            const userId = 'user_' + email.replace(/[^a-zA-Z0-9]/g, '_');
             
-            // Rich Identify Call - Full customer profile
+            // Rich Identify Call following Segment spec
             analytics.identify(userId, {
-                first_name: firstName,
-                last_name: lastName,
+                // Standard Segment traits
                 email: email,
                 phone: phone,
+                firstName: firstName,
+                lastName: lastName,
+                name: `${firstName} ${lastName}`,
+                created_at: new Date().toISOString(),
+                // Opry-specific traits
+                preferred_venue: interest,
                 venue_interest: interest,
                 signup_source: 'Signup Modal',
                 signup_date: new Date().toISOString(),
-                customer_type: 'Lead',
-                communication_preference: 'Email and SMS',
-                lifecycle_stage: 'Subscriber'
+                customer_type: 'Registered',
+                communication_preference: phone ? 'Email and SMS' : 'Email',
+                lifecycle_stage: 'Subscriber',
+                marketing_opt_in: true,
+                // Business metrics for segmentation
+                total_lifetime_value: 0,
+                total_orders: 0,
+                first_purchase_date: null,
+                last_purchase_date: null,
+                customer_segment: 'New',
+                favorite_artists: [],
+                // Context
+                signup_device: getDeviceType(),
+                signup_url: window.location.href
             });
             
             currentUserId = email;
             document.getElementById('userId').textContent = email;
             
             // Track signup completion
-            analytics.track('Account Created', {
+            analytics.track('Signed Up', {
                 email: email,
                 first_name: firstName,
                 last_name: lastName,
+                phone: phone,
                 venue_interest: interest,
                 signup_method: 'Website Form',
+                form_name: 'Account Signup',
                 ...getSessionContext()
             });
             
-            logEvent('Account Created + Identify', { email, interest });
+            logEvent('Signed Up + Identify', { email, interest });
             
-            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles for personalization\n• Unified view for cross-channel campaigns`);
+            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles with preferences\n• Unified view for cross-channel campaigns\n• Foundation for increasing repeat purchase rate from 1.1 to 1.65`);
             closeModal('signupModal');
             document.getElementById('signupForm').reset();
             
@@ -1402,29 +1500,32 @@
         // Modal Functions
         function openShowsModal() {
             document.getElementById('showsModal').style.display = 'block';
-            analytics.track('Modal Opened', {
+            analytics.track('Modal Viewed', {
                 modal_name: 'Shows',
+                modal_type: 'Product Listing',
                 ...getSessionContext()
             });
-            logEvent('Modal Opened', { modal: 'Shows' });
+            logEvent('Modal Viewed', { modal: 'Shows' });
         }
         
         function openToursModal() {
             document.getElementById('toursModal').style.display = 'block';
-            analytics.track('Modal Opened', {
+            analytics.track('Modal Viewed', {
                 modal_name: 'Tours',
+                modal_type: 'Product Listing',
                 ...getSessionContext()
             });
-            logEvent('Modal Opened', { modal: 'Tours' });
+            logEvent('Modal Viewed', { modal: 'Tours' });
         }
         
         function openSignupModal() {
             document.getElementById('signupModal').style.display = 'block';
-            analytics.track('Modal Opened', {
+            analytics.track('Modal Viewed', {
                 modal_name: 'Signup',
+                modal_type: 'Registration Form',
                 ...getSessionContext()
             });
-            logEvent('Modal Opened', { modal: 'Signup' });
+            logEvent('Modal Viewed', { modal: 'Signup' });
         }
         
         function closeModal(modalId) {
@@ -1438,44 +1539,42 @@
             }
         }
         
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = 'none';
-            }
-        }
-        
-        // Track page engagement on exit
         window.addEventListener('beforeunload', function() {
             const timeOnPage = Math.round((Date.now() - sessionStartTime) / 1000);
-            analytics.track('Session Ended', {
+            analytics.track('Session Completed', {
                 session_duration_seconds: timeOnPage,
                 events_triggered: eventCount,
-                page_url: window.location.href
+                page_url: window.location.href,
+                user_type: currentUserId === 'Anonymous' ? 'Anonymous' : 'Identified',
+                device_type: getDeviceType()
             });
         });
         
         // Initial page view is tracked by analytics.page() in the snippet
         console.log('[v0] Segment Analytics initialized - Opry Demo');
+        console.log('[v0] Device Type:', getDeviceType());
         logEvent('Page Loaded', { url: window.location.href });
 
         function trackOpry100Feature(featureName) {
-            analytics.track('Opry 100 Feature Clicked', {
-                feature_name: featureName,
-                section: 'Opry 100 Showcase',
+            analytics.track('Promotion Clicked', {
+                promotion_name: featureName,
+                promotion_id: featureName.toLowerCase().replace(/\s+/g, '_'),
+                creative: 'Opry 100 Feature Card',
+                position: 'Opry 100 Section',
                 ...getSessionContext()
             });
-            logEvent('Opry 100 Feature Clicked', { featureName });
-            alert(`Viewing: ${featureName}\n\n[DEMO NOTE] Tracks engagement with special Opry 100 content for targeted campaigns.`);
+            logEvent('Promotion Clicked', { featureName });
+            alert(`Viewing: ${featureName}\n\n[DEMO NOTE] Tracks engagement with special Opry 100 content for:\n• Targeted promotional campaigns\n• Content performance measurement\n• Personalized recommendations`);
         }
         
         function trackArtistClick(artistName) {
-            analytics.track('Artist Profile Viewed', {
+            analytics.track('Artist Viewed', {
                 artist_name: artistName,
+                content_type: 'Artist Profile',
                 section: 'Featured Artists',
                 ...getSessionContext()
             });
-            logEvent('Artist Profile Viewed', { artistName });
+            logEvent('Artist Viewed', { artistName });
         }
     </script>
 </body>
