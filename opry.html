@@ -1333,9 +1333,10 @@
                 customer_type: currentUserId === 'Anonymous' ? 'Guest' : 'Registered',
                 ...getSessionContext()
             });
+            
             logEvent('Order Completed', { eventName, revenue: price });
             
-            alert(`✓ Order Confirmed!\n\nOrder ID: ${orderId}\nEvent: ${eventName}\nTotal: $${price.toFixed(2)}\n\n[DEMO NOTE] This "Order Completed" event enables:\n• LTV calculation and tracking\n• Repeat purchase rate measurement (1.1 → 1.65 goal)\n• Revenue attribution by venue/brand\n• Customer segmentation by purchase behavior`);
+            alert(`✓ Order Confirmed!\n\nOrder ID: ${orderId}\nEvent: ${eventName}\nTotal: $${price.toFixed(2)}\n\n[DEMO NOTE] This "Order Completed" event enables:\n• LTV calculation and tracking\n• Repeat purchase rate measurement and optimization\n• Revenue attribution by venue/brand\n• Customer segmentation by purchase behavior`);
             closeModal('eventModal');
         }
         
@@ -1490,7 +1491,7 @@
             
             logEvent('Signed Up + Identify', { email, interest });
             
-            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles with preferences\n• Unified view for cross-channel campaigns\n• Foundation for increasing repeat purchase rate from 1.1 to 1.65`);
+            alert(`✓ Welcome ${firstName}!\n\nYour account has been created.\n\n[DEMO NOTE] This demonstrates:\n• Identity resolution across 16 Opry brands\n• Rich customer profiles with preferences\n• Unified view for cross-channel campaigns\n• Foundation for increasing repeat purchase rates and customer loyalty`);
             closeModal('signupModal');
             document.getElementById('signupForm').reset();
             
